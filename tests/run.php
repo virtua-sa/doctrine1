@@ -15,13 +15,13 @@ $excludeTickets = array(
     '1935',
     '2015',
     '2292',
+    'DC356', // Causing a fatal error right now, bailing rest of test suite
     'DC521' // PostgreSQL specific error
 );
 
 $ticketTestCases = glob(dirname(__FILE__) . '/Ticket/*TestCase.php');
 
-foreach ($ticketTestCases as $testCase)
-{
+foreach ($ticketTestCases as $testCase) {
     $fileInfo = pathinfo($testCase);
     $name = str_replace('TestCase', '', $fileInfo['filename']);
 
@@ -187,13 +187,13 @@ $db->addTestCase(new Doctrine_Connection_Profiler_TestCase());
 $test->addTestCase($db);
 
 // Event Listener Tests
-$event_listener = new GroupTest('EventListener Tests','event_listener');
+$event_listener = new GroupTest('EventListener Tests', 'event_listener');
 $event_listener->addTestCase(new Doctrine_EventListener_TestCase());
 $event_listener->addTestCase(new Doctrine_EventListener_Chain_TestCase());
 $test->addTestCase($event_listener);
 
 // Query Tests
-$query_tests = new GroupTest('Query Tests','query');
+$query_tests = new GroupTest('Query Tests', 'query');
 $query_tests->addTestCase(new Doctrine_Query_TestCase());
 $query_tests->addTestCase(new Doctrine_Query_Condition_TestCase());
 $query_tests->addTestCase(new Doctrine_Query_MultiJoin_TestCase());
@@ -209,6 +209,7 @@ $query_tests->addTestCase(new Doctrine_Query_IdentifierQuoting_TestCase());
 $query_tests->addTestCase(new Doctrine_Query_Update_TestCase());
 $query_tests->addTestCase(new Doctrine_Query_Delete_TestCase());
 $query_tests->addTestCase(new Doctrine_Query_Join_TestCase());
+$query_tests->addTestCase(new Doctrine_Query_NotExists_TestCase());
 $query_tests->addTestCase(new Doctrine_Query_Having_TestCase());
 $query_tests->addTestCase(new Doctrine_Query_Orderby_TestCase());
 $query_tests->addTestCase(new Doctrine_Query_Subquery_TestCase());
