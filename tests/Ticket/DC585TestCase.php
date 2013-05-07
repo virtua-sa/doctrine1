@@ -4,7 +4,7 @@
  * Doctrine_Ticket_585_TestCase
  *
  * @package     Doctrine
- * @author      Joaquin Bravo <jackbravo@gmail.com>
+ * @author      Jay Klehr <jay@diablomedia.com>
  * @license     http://www.opensource.org/licenses/lgpl-license.php LGPL
  * @category    Object Relational Mapping
  * @link        www.doctrine-project.org
