@@ -11,6 +11,7 @@ ini_set('max_execution_time', 900);
 ini_set('date.timezone', 'GMT+0');
 
 define('DOCTRINE_DIR', $_SERVER['DOCTRINE_DIR']);
+set_include_path(DOCTRINE_DIR);
 
 require_once(DOCTRINE_DIR . '/lib/Doctrine.php');
 
