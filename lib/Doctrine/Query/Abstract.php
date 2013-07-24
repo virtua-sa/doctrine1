@@ -871,10 +871,11 @@ abstract class Doctrine_Query_Abstract
      *
      * @return string    the hash
      */
-    public function calculateQueryCacheHash()
+    public function calculateQueryCacheHash($params = array())
     {
         $dql = $this->getDql();
-        $hash = md5($dql . var_export($this->_pendingJoinConditions, true) . 'DOCTRINE_QUERY_CACHE_SALT');
+        $params = $this->getFlattenedParams($params);
+        $hash = md5($dql . var_export($this->_pendingJoinConditions, true) . var_export($params, true) . 'DOCTRINE_QUERY_CACHE_SALT');
         return $hash;
     }
 
@@ -931,7 +932,7 @@ abstract class Doctrine_Query_Abstract
         if ( ! $this->_view) {
             if ($this->_queryCache !== false && ($this->_queryCache || $this->_conn->getAttribute(Doctrine_Core::ATTR_QUERY_CACHE))) {
                 $queryCacheDriver = $this->getQueryCacheDriver();
-                $hash = $this->calculateQueryCacheHash();
+                $hash = $this->calculateQueryCacheHash($params);
                 $cached = $queryCacheDriver->fetch($hash);
 
                 // If we have a cached query...
