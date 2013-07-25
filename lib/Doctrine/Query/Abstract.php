@@ -873,9 +873,14 @@ abstract class Doctrine_Query_Abstract
      */
     public function calculateQueryCacheHash($params = array())
     {
+        $paramString = '';
         $dql = $this->getDql();
         $params = $this->getFlattenedParams($params);
-        $hash = md5($dql . var_export($this->_pendingJoinConditions, true) . var_export($params, true) . 'DOCTRINE_QUERY_CACHE_SALT');
+        foreach ($params as $array) {
+            $paramString .= '|' . count($array);
+        }
+
+        $hash = md5($dql . var_export($this->_pendingJoinConditions, true) . $paramString . 'DOCTRINE_QUERY_CACHE_SALT');
         return $hash;
     }
 
