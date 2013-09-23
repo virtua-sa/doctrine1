@@ -558,6 +558,8 @@ class Doctrine_Pager
     {
         if ( !$this->getCountExecuted()) {
             $this->_initialize($params);
+        } else {
+            $this->_adjustOffset();
         }
 
         $this->_setExecuted(true);
