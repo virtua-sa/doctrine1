@@ -11,7 +11,9 @@ install: composer install
 notifications:
   email: false
 
-script: php tests/run.php
+script: 
+  - cd tests
+  - php run.php
 
 matrix:
   allow_failures:
