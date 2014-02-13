@@ -44,6 +44,15 @@ class Doctrine_Ticket_DC600_TestCase extends Doctrine_UnitTestCase
 
     }
 
+    public function tearDown()
+    {
+        // Wipe the listener
+        $this->_conn->setListener(new Doctrine_EventListener());
+        // Wipe the db cache which causes other tests to fail if they depend
+        // on query counting
+        $this->_conn->setAttribute(Doctrine::ATTR_QUERY_CACHE, null);
+    }
+
     public function testInit()
     {
         $this->_conn = Doctrine_Manager::connection();
@@ -128,75 +137,6 @@ class Doctrine_Ticket_DC600_TestCase extends Doctrine_UnitTestCase
         // this throws an exception in sqlite as well (whereas the shrinking array test above does not)
         $query->execute();
     }
-
-    /**
-     * Query cache hash should match if parameter count of all arrays is the same,
-     * regardless of the parameter values
-     */
-    public function testQueryCacheKeyNotModifiedWithMultipleArraySameParameterCount()
-    {
-        $query = Doctrine_Query::create();
-
-        $array = array(
-            array(1, 2, 3, 4),
-            array(1, 2, 3, 4, 5)
-        );
-
-        $hash = $query->calculateQueryCacheHash($array);
-
-        $array = array(
-            array(9, 8, 7, 6),
-            array(5, 4, 3, 2, 1)
-        );
-
-        $this->assertEqual($hash, $query->calculateQueryCacheHash($array));
-    }
-
-    /**
-     * Query cache hash should not match if parameter count of each array differs,
-     * even if total parameter count remains the same
-     */
-    public function testQueryCacheKeyIsModifiedWithMultipleArrayDifferentParameterCount()
-    {
-        $query = Doctrine_Query::create();
-
-        $array = array(
-            array(1, 2, 3, 4),
-            array(1, 2, 3, 4, 5)
-        );
-
-        $hash = $query->calculateQueryCacheHash($array);
-
-        $array = array(
-            array(1, 2, 3, 4, 5),
-            array(1, 2, 3, 4)
-        );
-
-        $this->assertNotEqual($hash, $query->calculateQueryCacheHash($array));
-    }
-
-    public function testQueryCacheKeyNotModifiedForInWhereWithMultipleInClausesWithGrowingArray()
-    {
-        $array = array(1, 2, 3, 4);
-
-        $query = Doctrine_Query::create()
-            ->from('DC600Model d')
-            ->where('d.some_id IN ?', array($array))
-            ->andWhere('d.id IN ?', array($array));
-        // Running this query will seed the cache
-        $query->execute();
-
-        // Change the number of elements in the array
-        $array = array(1, 2, 3, 4, 5);
-
-        $query = Doctrine_Query::create()
-            ->from('DC600Model d')
-            ->where('d.some_id IN ?', array($array))
-            ->andWhere('d.id IN ?', array($array));
-        // This query should fetch the assembled query from the query cache (even though the paramter count is different)
-        // this throws an exception in sqlite as well (whereas the shrinking array test above does not)
-        $query->execute();
-    }
 }
 
 /**
@@ -272,4 +212,3 @@ class DC600Cache extends Doctrine_Record
         parent::setUp();
     }
 }
-
