@@ -44,6 +44,15 @@ class Doctrine_Ticket_DC600_TestCase extends Doctrine_UnitTestCase
 
     }
 
+    public function tearDown()
+    {
+        // Wipe the listener
+        $this->_conn->setListener(new Doctrine_EventListener());
+        // Wipe the db cache which causes other tests to fail if they depend
+        // on query counting
+        $this->_conn->setAttribute(Doctrine::ATTR_QUERY_CACHE, null);
+    }
+
     public function testInit()
     {
         $this->_conn = Doctrine_Manager::connection();
@@ -272,4 +281,3 @@ class DC600Cache extends Doctrine_Record
         parent::setUp();
     }
 }
-
