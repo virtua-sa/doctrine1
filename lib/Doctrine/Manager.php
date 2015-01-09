@@ -490,7 +490,9 @@ class Doctrine_Manager extends Doctrine_Configurable implements Countable, Itera
                     parse_str($parts['query'], $queryParts);
                     if (isset($queryParts['charset'])) {
                         $parts['dsn'] .= ';charset=' . $queryParts['charset'];
+                        unset($queryParts['charset']);
                     }
+                    $parts['query'] = http_build_query($queryParts);
                 }
                 break;
             case 'oci8':
