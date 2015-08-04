@@ -264,7 +264,7 @@ class Doctrine_Connection_Mssql extends Doctrine_Connection_Common
             $tokens[$i] = trim(
                 preg_replace_callback(
                     '/##(\d+)##/',
-                    function($m) use ($chunks) { return $chunks[$m[1]]; },
+                    function ($m) use ($chunks) { return $chunks[$m[1]]; },
                     $tokens[$i]
                 )
             );
@@ -411,8 +411,11 @@ class Doctrine_Connection_Mssql extends Doctrine_Connection_Common
             $query = preg_replace($re, "\\1##{$key}##", $query, 1);
         }
 
-        $replacement = 'is_null($value) ? \'NULL\' : $this->quote($params[\\1])';
-        $query = preg_replace('/##(\d+)##/e', $replacement, $query);
+        $query = preg_replace_callback(
+            '/##(\d+)##/',
+            function ($m) use ($value, $params) { is_null($value) ? 'NULL' : $this->quote($params[$m[1]]); },
+            $query
+        );
 
         return $query;
 
