@@ -413,7 +413,7 @@ class Doctrine_Connection_Mssql extends Doctrine_Connection_Common
 
         $query = preg_replace_callback(
             '/##(\d+)##/',
-            function ($m) use ($value, $params) { is_null($value) ? 'NULL' : $this->quote($params[$m[1]]); },
+            function ($m) use ($value, $params) { return is_null($value) ? 'NULL' : $this->quote($params[$m[1]]); },
             $query
         );
 
