@@ -21,4 +21,3 @@ matrix:
   allow_failures:
     - php: hhvm
     - php: 5.3
-    - php: 7.0
