@@ -1,5 +1,7 @@
 <?php
 
+ini_set('memory_limit', -1);
+
 $_SERVER['DOCTRINE_DIR'] = realpath(dirname(__FILE__).'/../');
 
 require 'bootstrap.php';
