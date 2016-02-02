@@ -17,6 +17,9 @@
         "ext-pdo": "*"
     },
     "autoload": {
-        "psr-0": { "Doctrine_": "lib/" }
+        "psr-0": { 
+            "Doctrine_": "lib/",
+            "sfYaml": "lib/Doctrine/Parser/sfYaml/"
+        }
     }
 }
