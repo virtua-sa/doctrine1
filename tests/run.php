@@ -241,6 +241,7 @@ $test->addTestCase($query_tests);
 $record = new GroupTest('Record Tests', 'record');
 $record->addTestCase(new Doctrine_Record_Hook_TestCase());
 $record->addTestCase(new Doctrine_Record_CascadingDelete_TestCase());
+$record->addTestCase(new Doctrine_RecordFilter_TestCase());
 $record->addTestCase(new Doctrine_Record_Filter_TestCase());
 $record->addTestCase(new Doctrine_Record_TestCase());
 $record->addTestCase(new Doctrine_Record_State_TestCase());
