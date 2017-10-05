@@ -1,4 +1,5 @@
-[![Build Status](https://travis-ci.org/diablomedia/doctrine1.png)](https://travis-ci.org/diablomedia/doctrine1)
+[![Build Status](https://travis-ci.org/diablomedia/doctrine1.png)](https://travis-ci.org/diablomedia/doctrine1) [![codecov](https://codecov.io/gh/diablomedia/doctrine1/branch/master/graph/badge.svg)](https://codecov.io/gh/diablomedia/doctrine1)
+
 Doctrine 1 ORM
 =============
 
