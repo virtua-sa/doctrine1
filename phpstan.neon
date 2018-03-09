@@ -1,0 +1,69 @@
+parameters:
+    ignoreErrors:
+        #########
+        # Level 0
+        #########
+        # Missing functions due to extension not installed
+        - '#Function oci_.+ not found\.#'
+        - '#Function apc_.+ not found\.#'
+        - '#Function xcache_.+ not found\.#'
+        # Memcache extension not installed
+        - '#Instantiated class Memcache not found\.#'
+        - '#Property .+ unknown class Memcache as its type\.#'
+        # These two methods don't exist (anywhere in Doctrine), this sequence adapter is probably broken
+        - '#Call to an undefined method Doctrine_Sequence_Db2::_connect\(\)\.#'
+        - '#Call to an undefined method Doctrine_Sequence_Db2::lastSequenceId\(\)\.#'
+        # This method only exists on Doctrine_Query_Condition
+        - '#Call to an undefined method Doctrine_Query_Set::parseLiteralValue\(\)\.#'
+        # These methods are defined on Doctrine_Query, and probably should be made abstract in Doctrine_Query_Abstract,
+        # but that would break anything extending Doctrine_Query_Abstract that doesn't define the method (like Doctrine_RawSql)
+        - '#Call to an undefined method Doctrine_Query_Abstract::isSubquery\(\)\.#'
+        - '#Call to an undefined method Doctrine_Query_Abstract::copy\(\)\.#'
+        # Similar to above, this is defined in all sub-classes of Doctrine_Query_Condition, but not in the abstract class
+        # itself, so should be an abstract method, but that would break any code outside of Doctrine that extends this
+        - '#Call to an undefined method Doctrine_Query_Condition::load\(\)\.#'
+        # Both Doctrine_Expression_Mysql and Doctrine_Expression_Pgsql call this, but doesn't seem to exist anywhere in
+        # the Doctrine codebase. Both methods it appears in are marked as "experimental"
+        - '#Call to an undefined method Doctrine_Expression_.+sql::patternEscapeString\(\)\.#'
+        # These two exception classes are found in the same "experimental" method as the above error
+        - '#Instantiated class Doctrine_Expression_.+sql_Exception not found\.#'
+        # This method does not exist anywhere in Doctrine
+        - '#Call to an undefined method Doctrine_Search_Indexer_Dir::indexFile\(\)\.#'
+        # Doctrine_Query_Abstract defines this with just one parameter but Doctrine_Query (which extends Doctrine_Query_Abstract)
+        # defines it with a second parameter ($limitSubQuery). Since this is called from Doctrine_Query_Abstract, the abstract
+        # signature should probably be changed, but that could break other implementations.
+        - '#Method Doctrine_Query_Abstract::getSqlQuery\(\) invoked with 2 parameters, 0-1 required\.#'
+        # In Doctrine_Column, not sure the intent here, seems like $field was to be passed to filter which enum value was sent?
+        # Either way, this method does not accept a parameter.
+        - '#Method Doctrine_Column::getEnumValues\(\) invoked with 1 parameter, 0 required\.#'
+        # In Doctrine_Cli_Formatter:81, this seems like a bug, the format probably has a type-o, but not sure what the intent was
+        # php > echo sprintf(">> %-$9s %s", 'testing', 'another test');
+        #   >> 9s another test
+        - '#Call to sprintf contains 1 placeholder, 2 values given\.#'
+        # This is probably intentional since it's a mock and doesn't want to have the same functionality as a true connection
+        - '#Doctrine_Connection_Mock::__construct\(\) does not call parent constructor from Doctrine_Connection\.#'
+        - '#Constructor of class Doctrine_Connection_Mock has an unused parameter \$.+\.#'
+        # Not really harmful or anything, none of the classes that ultimately extend Doctrine_Connection have either param
+        # in their signature. Even other extending classes shouldn't be affected if removed from signature, but just ignoring
+        - '#Constructor of class Doctrine_Connection has an unused parameter \$user\.#'
+        - '#Constructor of class Doctrine_Connection has an unused parameter \$pass\.#'
+        # These aren't implemented yet (throw an exception stating such)
+        - '#Constructor of class Doctrine_Node_MaterializedPath_.+Iterator has an unused parameter \$(node|opts)\.#'
+        # This might be a type-o, not sure. Doctrine_Connection has a __get magic method that returns various properties, most of
+        # them defined in the $modules property. There's an "export" property defined there, but not "exported"
+        - '#Access to an undefined property Doctrine_Connection::\$exported\.#'
+        # Don't really see this referenced anywhere other than being set in a few classes (These two and on a "conn" property in Doctrine_DataDict_Pgsql)
+        # Doesn't appear to be used with __get or __set either (the Sequence class or its parents don't define any of those)
+        - '#Access to an undefined property Doctrine_Sequence::\$warnings\.#'
+        - '#Access to an undefined property Doctrine_Sequence_Mssql::\$warnings\.#'
+        # This is probably supposed to be `$this->conn->string_quoting` as the Doctrine_Connection class does have that
+        # property (through __get), and does look like it contains an "escape_pattern" key
+        - '#Access to an undefined property Doctrine_Formatter::\$string_quoting\.#'
+        # This one is on Doctrine_Connection as well (through __get)
+        - '#Access to an undefined property Doctrine_Formatter::\$wildcards\.#'
+        # This one is probably supposed to be $_preQueried, not $_preQuery, which exists on Doctrine_Query_Abstract that Doctrine_RawSql extends
+        # Didn't change as I don't know what the effect would be
+        - '#Access to an undefined property Doctrine_RawSql::\$_preQuery\.#'
+        # This is defined in Doctrine_Hydrator, but not Doctrine_Hydrator_Abstract (which both Doctrine_Hydrator and Doctrine_Hydrator_Graph extend)
+        # Should probably be defined in the Abstract
+        - '#Access to an undefined property Doctrine_Hydrator_Graph::\$_rootAlias\.#'

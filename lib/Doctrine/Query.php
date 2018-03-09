@@ -223,7 +223,7 @@ class Doctrine_Query extends Doctrine_Query_Abstract implements Countable
      * createSubquery
      * creates a subquery
      *
-     * @return Doctrine_Hydrate
+     * @return Doctrine_Query
      */
     public function createSubquery()
     {
@@ -1103,7 +1103,7 @@ class Doctrine_Query extends Doctrine_Query_Abstract implements Countable
      * handling.
      *
      * @param string $alias Component Alias
-     * @return Processed pending conditions
+     * @return string Processed pending conditions
      */
     protected function _processPendingJoinConditions($alias)
     {

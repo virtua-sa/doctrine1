@@ -38,11 +38,14 @@ class Doctrine_Validator extends Doctrine_Locator_Injectable
      */
     private static $validators = array();
 
+    // This was undefined, added for static analysis and set to public so api isn't changed
+    public $stack;
+
     /**
      * Get a validator instance for the passed $name
      *
      * @param  string   $name  Name of the validator or the validator class name
-     * @return Doctrine_Validator_Interface $validator
+     * @return Doctrine_Validator_Driver $validator
      */
     public static function getValidator($name)
     {

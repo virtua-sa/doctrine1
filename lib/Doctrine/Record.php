@@ -1960,7 +1960,7 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
             $array = $data;
         }
 
-        return $this->fromArray($array, $deep);
+        $this->fromArray($array, $deep);
     }
 
     /**
@@ -2093,9 +2093,9 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
     public function importFrom($type, $data, $deep = true)
     {
         if ($type == 'array') {
-            return $this->fromArray($data, $deep);
+            $this->fromArray($data, $deep);
         } else {
-            return $this->fromArray(Doctrine_Parser::load($data, $type), $deep);
+            $this->fromArray(Doctrine_Parser::load($data, $type), $deep);
         }
     }
 

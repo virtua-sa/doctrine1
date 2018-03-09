@@ -200,8 +200,8 @@ END;
         $down = array();
         if ( ! empty($changes['dropped_foreign_keys'])) {
             foreach ($changes['dropped_foreign_keys'] as $tableName => $droppedFks) {
-                if ( ! empty($changes['dropped_tables']) && isset($changes['dropped_tables'][$tableName])) { 
-                    continue; 
+                if ( ! empty($changes['dropped_tables']) && isset($changes['dropped_tables'][$tableName])) {
+                    continue;
                 }
 
                 foreach ($droppedFks as $name => $foreignKey) {
@@ -213,8 +213,8 @@ END;
 
         if ( ! empty($changes['dropped_indexes'])) {
             foreach ($changes['dropped_indexes'] as $tableName => $removedIndexes) {
-                if ( ! empty($changes['dropped_tables']) && isset($changes['dropped_tables'][$tableName])) { 
-                    continue; 
+                if ( ! empty($changes['dropped_tables']) && isset($changes['dropped_tables'][$tableName])) {
+                    continue;
                 }
 
                 foreach ($removedIndexes as $name => $index) {
@@ -226,8 +226,8 @@ END;
 
         if ( ! empty($changes['created_foreign_keys'])) {
             foreach ($changes['created_foreign_keys'] as $tableName => $createdFks) {
-                if ( ! empty($changes['dropped_tables']) && isset($changes['dropped_tables'][$tableName])) { 
-                    continue; 
+                if ( ! empty($changes['dropped_tables']) && isset($changes['dropped_tables'][$tableName])) {
+                    continue;
                 }
 
                 foreach ($createdFks as $name => $foreignKey) {
@@ -239,8 +239,8 @@ END;
 
         if ( ! empty($changes['created_indexes'])) {
             foreach ($changes['created_indexes'] as $tableName => $addedIndexes) {
-                if ( ! empty($changes['dropped_tables']) && isset($changes['dropped_tables'][$tableName])) { 
-                    continue; 
+                if ( ! empty($changes['dropped_tables']) && isset($changes['dropped_tables'][$tableName])) {
+                    continue;
                 }
 
                 foreach ($addedIndexes as $name => $index) {
@@ -265,7 +265,7 @@ END;
     /**
      * Generate a set of migration classes from the existing databases
      *
-     * @return void
+     * @return bool
      */
     public function generateMigrationsFromDb()
     {
@@ -348,7 +348,7 @@ END;
      */
     public function buildCreateForeignKey($tableName, $definition)
     {
-        return "        \$this->createForeignKey('" . $tableName . "', '" . $definition['name'] . "', " . $this->varExport($definition, true) . ");";
+        return "        \$this->createForeignKey('" . $tableName . "', '" . $definition['name'] . "', " . $this->varExport($definition) . ");";
     }
 
     /**
@@ -373,7 +373,7 @@ END;
     {
         $code  = "        \$this->createTable('" . $tableData['tableName'] . "', ";
 
-        $code .= $this->varExport($tableData['columns'], true) . ", ";
+        $code .= $this->varExport($tableData['columns']) . ", ";
 
         $optionsWeNeed = array('type', 'indexes', 'primary', 'collate', 'charset');
 
@@ -384,7 +384,7 @@ END;
             }
         }
 
-        $code .= $this->varExport($options, true);
+        $code .= $this->varExport($options);
 
         $code .= ");";
 
@@ -453,7 +453,7 @@ END;
      * @param string $tableName
      * @param string $indexName
      * @param string $index
-     * @return sgtring $code
+     * @return string $code
      */
     public function buildAddIndex($tableName, $indexName, $index)
     {
