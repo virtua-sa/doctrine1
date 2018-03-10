@@ -127,7 +127,7 @@ class Doctrine_Compiler
         $stripped = php_strip_whitespace($target);
         $fp = @fopen($target, 'w');
         if ($fp === false) {
-            throw new Doctrine_Compiler_Exception("Couldn't write compiled data. Failed to open $file");
+            throw new Doctrine_Compiler_Exception("Couldn't write compiled data. Failed to open $target");
         }
 
         fwrite($fp, $stripped);

@@ -1823,6 +1823,7 @@ class Doctrine_Table extends Doctrine_Configurable implements Countable
             }
 
             $found = false;
+            $id = array();
             foreach ($identifierFieldNames as $fieldName) {
                 if ( ! isset($this->_data[$fieldName])) {
                     // primary key column not found return new record

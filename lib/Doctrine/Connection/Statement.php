@@ -338,6 +338,7 @@ class Doctrine_Connection_Statement implements Doctrine_Adapter_Statement_Interf
         $event = new Doctrine_Event($this, Doctrine_Event::STMT_FETCHALL, $this->getQuery());
         $event->fetchMode = $fetchMode;
         $event->columnIndex = $columnIndex;
+        $data = array();
 
         $this->_conn->getListener()->preFetchAll($event);
 
@@ -484,6 +485,6 @@ class Doctrine_Connection_Statement implements Doctrine_Adapter_Statement_Interf
             return $this->_stmt->setFetchMode($mode, $arg1, $arg2);
         } else {
             return $this->_stmt->setFetchMode($mode);
-        } 
+        }
     }
 }

@@ -670,6 +670,8 @@ class Doctrine_Export extends Doctrine_Connection_Module
      */
     public function getFieldDeclarationList(array $fields)
     {
+        $queryFields = array();
+
         foreach ($fields as $fieldName => $field) {
             $query = $this->getDeclaration($fieldName, $field);
 

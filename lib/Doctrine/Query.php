@@ -1014,6 +1014,9 @@ class Doctrine_Query extends Doctrine_Query_Abstract implements Countable
                 $distinct = ($this->_sqlParts['distinct']) ? 'DISTINCT ' : '';
                 $q = 'SELECT ' . $distinct . implode(', ', $this->_sqlParts['select']) . ' FROM ';
             break;
+            default:
+                $q = '';
+            break;
         }
         return $q;
     }
