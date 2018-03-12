@@ -46,11 +46,11 @@ class Doctrine_Export_Mssql extends Doctrine_Export
         $query = "CREATE DATABASE $name";
         $options = $this->conn->getOptions();
         if (isset($options['database_device']) && $options['database_device']) {
-            $query.= ' ON '.$this->conn->options['database_device'];
-            $query.= $this->conn->options['database_size'] ? '=' .
-                     $this->conn->options['database_size'] : '';
+            $query.= ' ON '.$this->conn->getOption('database_device');
+            $query.= $this->conn->getOption('database_size') ? '=' .
+                     $this->conn->getOption('database_size') : '';
         }
-        return $this->conn->standaloneQuery($query, array(), true);
+        return $this->conn->standaloneQuery($query, array());
     }
 
     /**
@@ -62,7 +62,7 @@ class Doctrine_Export_Mssql extends Doctrine_Export
     public function dropDatabase($name)
     {
         $name = $this->conn->quoteIdentifier($name, true);
-        return $this->conn->standaloneQuery('DROP DATABASE ' . $name, array(), true);
+        return $this->conn->standaloneQuery('DROP DATABASE ' . $name, array());
     }
 
     /**
@@ -344,7 +344,7 @@ class Doctrine_Export_Mssql extends Doctrine_Export
     public function createSequence($seqName, $start = 1, array $options = array())
     {
         $sequenceName = $this->conn->quoteIdentifier($this->conn->getSequenceName($seqName), true);
-        $seqcolName = $this->conn->quoteIdentifier($this->conn->options['seqcol_name'], true);
+        $seqcolName = $this->conn->quoteIdentifier($this->conn->getOption('seqcol_name'), true);
         $query = 'CREATE TABLE ' . $sequenceName . ' (' . $seqcolName .
                  ' INT PRIMARY KEY CLUSTERED IDENTITY(' . $start . ', 1) NOT NULL)';
 
@@ -474,7 +474,7 @@ class Doctrine_Export_Mssql extends Doctrine_Export
      * Obtain DBMS specific SQL code portion needed to set a NOT NULL
      * declaration to be used in statements like CREATE TABLE.
      *
-     * @param array $field      field definition array
+     * @param array $definition field definition array
      * @return string           DBMS specific SQL code portion needed to set a default value
      */
     public function getNotNullFieldDeclaration(array $definition)

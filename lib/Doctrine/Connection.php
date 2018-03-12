@@ -72,11 +72,15 @@
  * @property array $string_quoting
  * @property int $varchar_max_length
  * @property array $wildcards
+ * Not initially defined, but added later
+ * @property string $dsn
+ * Set by Doctrine_Connection_Oracle
+ * @property int $number_max_precision
  */
 abstract class Doctrine_Connection extends Doctrine_Configurable implements Countable, IteratorAggregate, Serializable
 {
     /**
-     * @var $dbh                                the database handler
+     * @var PDO|Doctrine_Adapter_Interface $dbh                                the database handler
      */
     protected $dbh;
 
@@ -256,7 +260,7 @@ abstract class Doctrine_Connection extends Doctrine_Configurable implements Coun
      *
      * Get array of all options
      *
-     * @return void
+     * @return array
      */
     public function getOptions()
     {
@@ -284,7 +288,7 @@ abstract class Doctrine_Connection extends Doctrine_Configurable implements Coun
      * Set option value
      *
      * @param string $option
-     * @return void
+     * @return mixed
      */
     public function setOption($option, $value)
     {
@@ -530,7 +534,7 @@ abstract class Doctrine_Connection extends Doctrine_Configurable implements Coun
     /**
      * converts given driver name
      *
-     * @param
+     * @param string $name
      */
     public function driverName($name)
     {
@@ -560,10 +564,10 @@ abstract class Doctrine_Connection extends Doctrine_Configurable implements Coun
      * query isemulated through this method for other DBMS using standard types
      * of queries inside a transaction to assure the atomicity of the operation.
      *
-     * @param                   string  name of the table on which the REPLACE query will
+     * @param   Doctrine_Table  $table  name of the table on which the REPLACE query will
      *                          be executed.
      *
-     * @param   array           an associative array that describes the fields and the
+     * @param   array           $fields an associative array that describes the fields and the
      *                          values that will be inserted or updated in the specified table. The
      *                          indexes of the array are the names of all the fields of the table.
      *
@@ -619,7 +623,7 @@ abstract class Doctrine_Connection extends Doctrine_Configurable implements Coun
      * deletes table row(s) matching the specified identifier
      *
      * @throws Doctrine_Connection_Exception    if something went wrong at the database level
-     * @param string $table         The table to delete data from
+     * @param Doctrine_Table $table         The table to delete data from
      * @param array $identifier     An associateve array containing identifier column-value pairs.
      * @return integer              The number of affected rows
      */
@@ -643,7 +647,7 @@ abstract class Doctrine_Connection extends Doctrine_Configurable implements Coun
      *
      * @throws Doctrine_Connection_Exception    if something went wrong at the database level
      * @param Doctrine_Table $table     The table to insert data into
-     * @param array $values             An associative array containing column-value pairs.
+     * @param array $fields             An associative array containing column-value pairs.
      *                                  Values can be strings or Doctrine_Expression instances.
      * @return integer                  the number of affected rows. Boolean false if empty value array was given,
      */
@@ -677,7 +681,7 @@ abstract class Doctrine_Connection extends Doctrine_Configurable implements Coun
      * Inserts a table row with specified data.
      *
      * @param Doctrine_Table $table     The table to insert data into.
-     * @param array $values             An associative array containing column-value pairs.
+     * @param array $fields             An associative array containing column-value pairs.
      *                                  Values can be strings or Doctrine_Expression instances.
      * @return integer                  the number of affected rows. Boolean false if empty value array was given,
      */
@@ -776,8 +780,8 @@ abstract class Doctrine_Connection extends Doctrine_Configurable implements Coun
      *
      * This method takes care of that conversion
      *
-     * @param array $item
-     * @return void
+     * @param array|bool $item
+     * @return array|int
      */
     public function convertBooleans($item)
     {
@@ -800,7 +804,7 @@ abstract class Doctrine_Connection extends Doctrine_Configurable implements Coun
     /**
      * Set the date/time format for the current connection
      *
-     * @param string    time format
+     * @param string $format   time format
      *
      * @return void
      */
@@ -1189,7 +1193,7 @@ abstract class Doctrine_Connection extends Doctrine_Configurable implements Coun
      * addTable
      * adds a Doctrine_Table object into connection registry
      *
-     * @param $table                a Doctrine_Table object to be added into registry
+     * @param Doctrine_Table  $table                a Doctrine_Table object to be added into registry
      * @return boolean
      */
     public function addTable(Doctrine_Table $table)

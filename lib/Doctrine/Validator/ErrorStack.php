@@ -67,7 +67,7 @@ class Doctrine_Validator_ErrorStack extends Doctrine_Access implements Countable
      * Adds an error to the stack.
      *
      * @param string $invalidFieldName
-     * @param string $errorType
+     * @param string $errorCode
      */
     public function add($invalidFieldName, $errorCode = 'general')
     {

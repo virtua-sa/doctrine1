@@ -163,7 +163,7 @@ class sfYamlInline
    *
    * @param scalar  $scalar
    * @param string  $delimiters
-   * @param array   $stringDelimiter
+   * @param array   $stringDelimiters
    * @param integer $i
    * @param boolean $evaluate
    *

@@ -55,7 +55,7 @@ class Doctrine_Data_Export extends Doctrine_Data
      * so simply turn them on and off when they need to query for the translations standalone and don't need
      * it to be indexed by the lang.
      *
-     * @return void
+     * @return int|false|string
      */
     public function doExport()
     {
@@ -108,7 +108,7 @@ class Doctrine_Data_Export extends Doctrine_Data
      *
      * Dump the prepared data to the fixtures files
      *
-     * @param string $array
+     * @param array $data
      * @return int|false|string
      */
     public function dumpData(array $data)

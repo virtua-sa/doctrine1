@@ -743,7 +743,8 @@ class Doctrine_Import_Schema
      * _validateSchemaElement
      *
      * @param string $name
-     * @param string $value
+     * @param string|array $element
+     * @param string $path
      * @return void
      */
     protected function _validateSchemaElement($name, $element, $path)

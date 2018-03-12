@@ -276,7 +276,7 @@ class Doctrine_Query_Tokenizer
      *     );
      *
      * @param string $str String to be clause exploded
-     * @param string $d   Delimeter which explodes the string
+     * @param array  $d   Delimeter which explodes the string
      * @param string $e1  First bracket, usually '('
      * @param string $e2  Second bracket, usually ')'
      *
@@ -293,7 +293,7 @@ class Doctrine_Query_Tokenizer
      * Builds regular expression for split from array. Return regular
      * expression to be applied
      *
-     * @param $d
+     * @param array $d
      *
      * @return string
      */
@@ -317,10 +317,10 @@ class Doctrine_Query_Tokenizer
     /**
      * Same as clauseExplode, but you give a regexp, which splits the string
      *
-     * @param $str
-     * @param $regexp
-     * @param $e1
-     * @param $e2
+     * @param string $str
+     * @param string $regexp
+     * @param string $e1
+     * @param string $e2
      *
      * @return array
      */
@@ -340,10 +340,10 @@ class Doctrine_Query_Tokenizer
     /**
      * this function is like clauseExplode, but it doesn't merge bracket terms
      *
-     * @param $str
-     * @param $d
-     * @param $e1
-     * @param $e2
+     * @param string $str
+     * @param string $regexp
+     * @param string $e1
+     * @param string $e2
      *
      * @return array
      */
@@ -415,10 +415,8 @@ class Doctrine_Query_Tokenizer
      *        array("d))'", '', -2)
      *     );
      *
-     * @param $str
-     * @param $d
-     * @param $e1
-     * @param $e2
+     * @param string $str
+     * @param string $regexp
      *
      * @return array
      */
@@ -465,7 +463,7 @@ class Doctrine_Query_Tokenizer
      *         array('5'    , '' , 0)
      *     );
      *
-     * @param $terms array
+     * @param array $terms
      *
      * @return array
      */
@@ -506,7 +504,7 @@ class Doctrine_Query_Tokenizer
      *
      * Note the trailing empty string. In the result, all even elements are quoted strings.
      *
-     * @param $str the string to split
+     * @param string $str the string to split
      *
      * @return array
      */

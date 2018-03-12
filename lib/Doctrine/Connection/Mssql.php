@@ -42,7 +42,7 @@ class Doctrine_Connection_Mssql extends Doctrine_Connection_Common
      * the constructor
      *
      * @param Doctrine_Manager $manager
-     * @param PDO $pdo                          database handle
+     * @param PDO|Doctrine_Adapter_Interface $adapter                          database handle
      */
     public function __construct(Doctrine_Manager $manager, $adapter)
     {
@@ -351,7 +351,7 @@ class Doctrine_Connection_Mssql extends Doctrine_Connection_Common
     /**
      * Checks if there's a sequence that exists.
      *
-     * @param  string $seq_name     The sequence name to verify.
+     * @param  string $seqName     The sequence name to verify.
      * @return boolean              The value if the table exists or not
      */
     public function checkSequence($seqName)
@@ -434,7 +434,7 @@ class Doctrine_Connection_Mssql extends Doctrine_Connection_Common
      * Inserts a table row with specified data.
      *
      * @param Doctrine_Table $table     The table to insert data into.
-     * @param array $values             An associative array containing column-value pairs.
+     * @param array $fields             An associative array containing column-value pairs.
      *                                  Values can be strings or Doctrine_Expression instances.
      * @return integer                  the number of affected rows. Boolean false if empty value array was given,
      */

@@ -283,8 +283,8 @@ abstract class Doctrine_Query_Abstract
     /**
      * Constructor.
      *
-     * @param Doctrine_Connection  The connection object the query will use.
-     * @param Doctrine_Hydrator_Abstract  The hydrator that will be used for generating result sets.
+     * @param Doctrine_Connection $connection The connection object the query will use.
+     * @param Doctrine_Hydrator_Abstract $hydrator The hydrator that will be used for generating result sets.
      */
     public function __construct(Doctrine_Connection $connection = null,
             Doctrine_Hydrator_Abstract $hydrator = null)
@@ -335,7 +335,7 @@ abstract class Doctrine_Query_Abstract
      * hasSqlTableAlias
      * whether or not this object has given tableAlias
      *
-     * @param string $tableAlias    the table alias to be checked
+     * @param string $sqlTableAlias    the table alias to be checked
      * @return boolean              true if this object has given alias, otherwise false
      */
     public function hasSqlTableAlias($sqlTableAlias)
@@ -390,7 +390,6 @@ abstract class Doctrine_Query_Abstract
      * getSqlQueryPart
      * gets an SQL query part from the SQL query part array
      *
-     * @param string $name          the name of the query part to be set
      * @param string $part          query part string
      * @throws Doctrine_Query_Exception   if trying to set unknown query part
      * @return mixed     this object
@@ -697,7 +696,7 @@ abstract class Doctrine_Query_Abstract
      * generateNewSqlTableAlias
      * generates a new alias from given table alias
      *
-     * @param string $tableAlias    table alias from which to generate the new alias from
+     * @param string $oldAlias      table alias from which to generate the new alias from
      * @return string               the created table alias
      */
     public function generateNewSqlTableAlias($oldAlias)
@@ -724,7 +723,7 @@ abstract class Doctrine_Query_Abstract
      * getSqlTableAliasSeed
      * returns the alias seed for given table alias
      *
-     * @param string $tableAlias    table alias that identifies the alias seed
+     * @param string $sqlTableAlias    table alias that identifies the alias seed
      * @return integer              table alias seed
      */
     public function getSqlTableAliasSeed($sqlTableAlias)
@@ -770,9 +769,9 @@ abstract class Doctrine_Query_Abstract
      * this method is needed by DQL subqueries which need the aliases
      * of the parent query
      *
-     * @param Doctrine_Hydrate $query   the query object from which the
+     * @param Doctrine_Query_Abstract $query   the query object from which the
      *                                  aliases are copied from
-     * @return Doctrine_Query         this object
+     * @return $this         this object
      */
     public function copySubqueryInfo(Doctrine_Query_Abstract $query)
     {
@@ -1184,7 +1183,7 @@ abstract class Doctrine_Query_Abstract
     /**
      * Constructs the query from the cached form.
      *
-     * @param string  The cached query, in a serialized form.
+     * @param string  $cached The cached query, in a serialized form.
      * @return array  The custom component that was cached together with the essential
      *                query data. This can be either a result set (result caching)
      *                or an SQL query string (query caching).
@@ -1226,7 +1225,7 @@ abstract class Doctrine_Query_Abstract
      * getCachedForm
      * returns the cached form of this query for given resultSet
      *
-     * @param array $resultSet
+     * @param array|Doctrine_Collection $customComponent
      * @return string           serialized string representation of this query
      */
     public function getCachedForm($customComponent = null)
@@ -1277,7 +1276,7 @@ abstract class Doctrine_Query_Abstract
      * adds an SQL table alias and associates it a component alias
      *
      * @param string $componentAlias    the alias for the query component associated with given tableAlias
-     * @param string $tableAlias        the table alias to be added
+     * @param string $sqlTableAlias        the table alias to be added
      * @return Doctrine_Query_Abstract
      */
     public function addSqlTableAlias($sqlTableAlias, $componentAlias)
@@ -1605,7 +1604,7 @@ abstract class Doctrine_Query_Abstract
      * update
      * sets the UPDATE part of the query
      *
-     * @param string $update        Query UPDATE part
+     * @param string $from
      * @return Doctrine_Query
      */
     public function update($from = null)
@@ -1621,8 +1620,7 @@ abstract class Doctrine_Query_Abstract
      * set
      * sets the SET part of the query
      *
-     * @param string $update        Query UPDATE part
-     * @return Doctrine_Query
+     * @return $this|Doctrine_Query
      */
     public function set($key, $value = null, $params = null)
     {
@@ -1711,7 +1709,7 @@ abstract class Doctrine_Query_Abstract
      * where
      * sets the WHERE part of the query
      *
-     * @param string $join         Query WHERE part
+     * @param string $where         Query WHERE part
      * @param mixed $params        an array of parameters or a simple scalar
      * @return Doctrine_Query
      */

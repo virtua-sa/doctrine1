@@ -1515,7 +1515,7 @@ class Doctrine_Query extends Doctrine_Query_Abstract implements Countable
         // add driver specific limit clause
         $subquery = $this->_conn->modifyLimitSubquery($table, $subquery, $this->_sqlParts['limit'], $this->_sqlParts['offset']);
 
-        $parts = $this->_tokenizer->quoteExplode($subquery, ' ', "'", "'");
+        $parts = $this->_tokenizer->quoteExplode($subquery, ' ');
 
         foreach ($parts as $k => $part) {
             if (strpos($part, ' ') !== false) {
@@ -1624,7 +1624,7 @@ class Doctrine_Query extends Doctrine_Query_Abstract implements Countable
      * @param string $query                 DQL query
      * @param boolean $clear                whether or not to clear the aliases
      * @throws Doctrine_Query_Exception     if some generic parsing error occurs
-     * @return Doctrine_Query
+     * @return $this
      */
     public function parseDqlQuery($query, $clear = true)
     {
@@ -1915,7 +1915,9 @@ class Doctrine_Query extends Doctrine_Query_Abstract implements Countable
         return $this->_queryComponents[$componentAlias];
     }
 
-
+    /**
+     * @param Doctrine_Relation_Association $relation
+     */
     protected function buildAssociativeRelationSql(Doctrine_Relation $relation, $assocAlias, $foreignAlias, $localAlias)
     {
         $table = $relation->getTable();

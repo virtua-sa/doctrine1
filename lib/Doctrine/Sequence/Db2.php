@@ -80,7 +80,7 @@ class Doctrine_Sequence_Db2 extends Doctrine_Sequence
              . $this->conn->quoteIdentifier($this->conn->formatter->getSequenceName($sequenceName))
              . ' AS VAL FROM SYSIBM.SYSDUMMY1';
 
-        $stmt   = $this->conn->query($sql);
+        $stmt   = $this->conn->standaloneQuery($sql);
         $result = $stmt->fetchAll(Doctrine_Core::FETCH_ASSOC);
         if ($result) {
             return $result[0]['VAL'];
@@ -121,7 +121,7 @@ class Doctrine_Sequence_Db2 extends Doctrine_Sequence
         }
 
         $sql = 'SELECT IDENTITY_VAL_LOCAL() AS VAL FROM SYSIBM.SYSDUMMY1';
-        $stmt = $this->conn->query($sql);
+        $stmt = $this->conn->standaloneQuery($sql);
         $result = $stmt->fetchAll(Doctrine_Core::FETCH_ASSOC);
         if ($result) {
             return $result[0]['VAL'];

@@ -77,7 +77,7 @@ class Doctrine_Transaction_Mysql extends Doctrine_Transaction
     /**
      * Set the transacton isolation level.
      *
-     * @param   string  standard isolation level
+     * @param   string  $isolation standard isolation level
      *                  READ UNCOMMITTED (allows dirty reads)
      *                  READ COMMITTED (prevents dirty reads)
      *                  REPEATABLE READ (prevents nonrepeatable reads)

@@ -640,7 +640,7 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
     /**
      * assigns the ErrorStack or returns it if called without parameters
      *
-     * @param Doctrine_Validator_ErrorStack          errorStack to be assigned for this record
+     * @param Doctrine_Validator_ErrorStack $stack          errorStack to be assigned for this record
      * @return void|Doctrine_Validator_ErrorStack    returns the errorStack associated with this record
      */
     public function errorStack($stack = null)
@@ -1127,7 +1127,7 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
      * returns the value of a property (column). If the property is not yet loaded
      * this method does NOT load it.
      *
-     * @param $name                         name of the property
+     * @param string $fieldName                         name of the property
      * @throws Doctrine_Record_Exception    if trying to get an unknown property
      * @return mixed
      */
@@ -1282,7 +1282,7 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
     /**
      * gets the custom mutator for a field name
      *
-     * @param string $fieldname
+     * @param string $fieldName
      * @return string
      */
     public function getMutator($fieldName)
@@ -1319,7 +1319,7 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
     /**
      * Set a fieldname to have a custom accessor and mutator
      *
-     * @param string $fieldname
+     * @param string $fieldName
      * @param string $accessor
      * @param string $mutator
      */
@@ -1435,7 +1435,7 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
     /**
      * alters mapped values, properties and related components.
      *
-     * @param mixed $name                   name of the property or reference
+     * @param mixed $fieldName                   name of the property or reference
      * @param mixed $value                  value of the property or reference
      * @param boolean $load                 whether or not to refresh / load the uninitialized record data
      *
@@ -1956,7 +1956,7 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
      *
      * @see fromArray()
      * @link http://www.doctrine-project.org/documentation/manual/1_1/en/working-with-models
-     * @param array|Doctrine_Record $array  array of data to merge, see link for documentation
+     * @param array|Doctrine_Record $data  array of data to merge, see link for documentation
      * @param bool   $deep   whether or not to merge relations
      * @return void
      */
@@ -1977,7 +1977,7 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
      * imports data from a php array
      *
      * @link http://www.doctrine-project.org/documentation/manual/1_1/en/working-with-models
-     * @param string $array  array of data, see link for documentation
+     * @param array $array  array of data, see link for documentation
      * @param bool   $deep   whether or not to act on relations
      * @return void
      */
@@ -2382,15 +2382,15 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
     /**
      * call
      *
-     * @param string|array $callback    valid callback
+     * @param callable $callback    valid callback
      * @param string $column            column name
-     * @param mixed arg1 ... argN       optional callback arguments
-     * @return Doctrine_Record provides a fluent interface
+     * @param mixed ...$args       optional callback arguments
+     * @return $this provides a fluent interface
      */
-    public function call($callback, $column)
+    public function call($callback, $column, ...$args)
     {
-        $args = func_get_args();
-        array_shift($args);
+        // Put $column on front of $args to maintain previous behavior
+        array_unshift($args, $column);
 
         if (isset($args[0])) {
             $fieldName = $args[0];
@@ -2406,7 +2406,7 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
     /**
      * getter for node associated with this record
      *
-     * @return Doctrine_Node    false if component is not a Tree
+     * @return Doctrine_Node|false    false if component is not a Tree
      */
     public function getNode()
     {

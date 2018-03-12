@@ -183,7 +183,7 @@ class Doctrine_Import_Builder extends Doctrine_Builder
      *
      * Class template used for writing classes
      *
-     * @var $_tpl
+     * @var string $_tpl
      */
     protected static $_tpl;
 
@@ -210,8 +210,8 @@ class Doctrine_Import_Builder extends Doctrine_Builder
     /**
      * setTargetPath
      *
-     * @param string path   the path where imported files are being generated
-     * @return
+     * @param string $path   the path where imported files are being generated
+     * @return void
      */
     public function setTargetPath($path)
     {
@@ -395,9 +395,7 @@ class Doctrine_Import_Builder extends Doctrine_Builder
     /**
      * buildSetUp
      *
-     * @param  array $options
-     * @param  array $columns
-     * @param  array $relations
+     * @param  array $definition
      * @return string
      */
     public function buildSetUp(array $definition)
@@ -520,7 +518,7 @@ class Doctrine_Import_Builder extends Doctrine_Builder
     /**
      * buildColumns
      *
-     * @param array $array
+     * @param array $columns
      * @return string|null
      */
     public function buildColumns(array $columns)
@@ -721,8 +719,8 @@ class Doctrine_Import_Builder extends Doctrine_Builder
      * emit an addChild
      *
      * @param int $level
+     * @param string $parent
      * @param string $name
-     * @param string $option
      * @return string addChild code
      */
     private function emitAddChild($level, $parent, $name)
@@ -735,7 +733,6 @@ class Doctrine_Import_Builder extends Doctrine_Builder
      *
      * @param int $level
      * @param string $name
-     * @param string $option
      * @return string actAs code
      */
     private function emitActAs($level, $name)
@@ -861,7 +858,7 @@ class Doctrine_Import_Builder extends Doctrine_Builder
     /**
      * buildAttributes
      *
-     * @param array $array
+     * @param array $attributes
      * @return string
      */
     public function buildAttributes(array $attributes)
@@ -898,7 +895,7 @@ class Doctrine_Import_Builder extends Doctrine_Builder
     /**
      * buildTableOptions
      *
-     * @param array $array
+     * @param array $options
      * @return string
      */
     public function buildOptions(array $options)
@@ -914,7 +911,7 @@ class Doctrine_Import_Builder extends Doctrine_Builder
     /**
      * buildIndexes
      *
-     * @param array $array
+     * @param array $indexes
      * @return string
      */
     public function buildIndexes(array $indexes)
@@ -992,14 +989,8 @@ class Doctrine_Import_Builder extends Doctrine_Builder
     /**
      * buildRecord
      *
-     * @param array $options
-     * @param array $columns
-     * @param array $relations
-     * @param array $indexes
-     * @param array $attributes
-     * @param array $templates
-     * @param array $actAs
-     * @return void=
+     * @param array $definition
+     * @return void
      */
     public function buildRecord(array $definition)
     {
@@ -1179,13 +1170,7 @@ class Doctrine_Import_Builder extends Doctrine_Builder
     /**
      * writeDefinition
      *
-     * @param array $options
-     * @param array $columns
-     * @param array $relations
-     * @param array $indexes
-     * @param array $attributes
-     * @param array $templates
-     * @param array $actAs
+     * @param array $definition
      * @return void
      */
     public function writeDefinition(array $definition)

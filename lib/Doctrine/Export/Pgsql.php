@@ -36,6 +36,12 @@ class Doctrine_Export_Pgsql extends Doctrine_Export
     public $tmpConnectionDatabase = 'postgres';
 
     /**
+     * @var Doctrine_Connection_Pgsql $conn       Doctrine_Connection object, every connection
+     *                                            module holds an instance of Doctrine_Connection
+     */
+    protected $conn;
+
+    /**
      * createDatabaseSql
      *
      * @param string $name
@@ -285,9 +291,9 @@ class Doctrine_Export_Pgsql extends Doctrine_Export
      * return RDBMS specific create sequence statement
      *
      * @throws Doctrine_Connection_Exception     if something fails at database level
-     * @param string    $seqName        name of the sequence to be created
-     * @param string    $start          start value of the sequence; default is 1
-     * @param array     $options  An associative array of table options:
+     * @param string     $sequenceName        name of the sequence to be created
+     * @param string|int $start          start value of the sequence; default is 1
+     * @param array      $options  An associative array of table options:
      *                          array(
      *                              'comment' => 'Foo',
      *                              'charset' => 'utf8',

@@ -64,12 +64,11 @@ class Doctrine_Connection_Profiler implements Doctrine_Overloadable, IteratorAgg
     /**
      * setFilterQueryType
      *
-     * @param integer $filter
      * @return boolean
      */
     public function setFilterQueryType() {
-                                             
-    }                                         
+
+    }
     /**
      * method overloader
      * this method is used for invoking different listeners, for the full
@@ -109,7 +108,7 @@ class Doctrine_Connection_Profiler implements Doctrine_Overloadable, IteratorAgg
      * @param mixed $key
      * @return Doctrine_Event
      */
-    public function get($key) 
+    public function get($key)
     {
         if (isset($this->events[$key])) {
             return $this->events[$key];
@@ -123,7 +122,7 @@ class Doctrine_Connection_Profiler implements Doctrine_Overloadable, IteratorAgg
      *
      * @return array        all events in an array
      */
-    public function getAll() 
+    public function getAll()
     {
         return $this->events;
     }
@@ -141,10 +140,10 @@ class Doctrine_Connection_Profiler implements Doctrine_Overloadable, IteratorAgg
 
     /**
      * count
-     * 
+     *
      * @return integer
      */
-    public function count() 
+    public function count()
     {
         return count($this->events);
     }
@@ -154,7 +153,7 @@ class Doctrine_Connection_Profiler implements Doctrine_Overloadable, IteratorAgg
      *
      * @return Doctrine_Event
      */
-    public function pop() 
+    public function pop()
     {
         $event = array_pop($this->events);
         if ($event !== null)

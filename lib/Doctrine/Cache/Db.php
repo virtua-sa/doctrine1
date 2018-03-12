@@ -37,7 +37,7 @@ class Doctrine_Cache_Db extends Doctrine_Cache_Driver
      * Configure Database cache driver. Specify instance of Doctrine_Connection
      * and tableName to store cache in
      *
-     * @param array $_options      an array of options
+     * @param array $options      an array of options
      */
     public function __construct($options = array())
     {

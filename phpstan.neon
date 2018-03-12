@@ -67,6 +67,7 @@ parameters:
         # This is defined in Doctrine_Hydrator, but not Doctrine_Hydrator_Abstract (which both Doctrine_Hydrator and Doctrine_Hydrator_Graph extend)
         # Should probably be defined in the Abstract
         - '#Access to an undefined property Doctrine_Hydrator_Graph::\$_rootAlias\.#'
+
         #########
         # Level 1
         #########
@@ -85,7 +86,7 @@ parameters:
         # but not certain (Doctrine_Adapter_Statement_Oracle:175)
         - '#Variable \$oci_length might not be defined\.#'
         # This one would require some testing to see if it can be predefined, as it's predefined as "null" in a specific case, but undefined otherwise
-        # (though is_null will return true for undefined variables (but throws a notice), so perhaps it doesn't matter if it's set to null.
+        # (though is_null will return true for undefined variables (but throws a notice), so perhaps it doesn't matter if it's set to null.)
         # Doctrine_Hydrator_Graph:131
         - '#Variable \$activeRootIdentifier might not be defined\.#'
         # These four are only used if the $autoincrement var is set to "true", and if it's set to "true", they get defined.
@@ -125,3 +126,51 @@ parameters:
         - '#Variable \$tableAlias might not be defined\.#'
         - '#Variable \$componentAlias might not be defined\.#'
         - '#Variable \$queryComponentsBefore might not be defined\.#'
+
+        #########
+        # Level 2
+        #########
+        # This exists on all of the Validator classes that extend Doctrine_Validator_Driver, but not the Driver class itself. Should probably be
+        # turned into an abstract class with the Validate method defined as abstract, but would break API
+        - '#Call to an undefined method Doctrine_Validator_Driver::validate\(\)\.#'
+        # From  Doctrine_IntegrityMapper, this method does not exist, and Doctrine_Manager doesn't appear to have any __call magic method implemented
+        # (nor its parents).  This code isn't currently touched by tests, assuming it's broken.
+        # (https://codecov.io/gh/diablomedia/doctrine1/src/master/lib/Doctrine/IntegrityMapper.php#L56)
+        - '#Call to an undefined method Doctrine_Manager::getDeleteActions\(\)\.#'
+        # Missing extensions
+        - '#Call to method .+\(\) on an unknown class Memcache\.#'
+        # There is one Doctrine_Connection subclass that has 6 parameters (Doctrine_Connection_Mssql), could perhaps branch this code
+        # and detect for that particular class and call it with 6 parameters in that case, otherwise with 4
+        # Doctrine_Query:1375
+        - '#Method Doctrine_Connection::modifyLimitQuery\(\) invoked with 6 parameters, 1-4 required\.#'
+        # In Doctrine_Connection:1107, I don't see this defined anywhere, or used outside of this particular case
+        - '#Access to an undefined property Exception::\$errorInfo\.#'
+        # In Doctrine_Collection_Iterator_Expandable:40, no static references to a function named "expand" in the codebase, and don't see any __call methods
+        # on Doctrine_Collection or its parents.
+        - '#Call to an undefined method Doctrine_Collection::expand\(\)\.#'
+        # In Doctrine_Export:744, all extending classes of Doctrine_DataDict implement this method, but Doctrine_DataDict does not (should probably be added
+        # as an abstract definition, which does break public API)
+        - '#Call to an undefined method Doctrine_DataDict::getNativeDeclaration\(\)\.#'
+        # In Doctrine_Import_Sqlite:139, similar to above, the extending classes define this method but base class does not
+        - '#Call to an undefined method Doctrine_DataDict::getPortableDeclaration\(\)\.#'
+        # In Doctrine_Query:905, this method doesn't appear to exist on Doctrine_Query or its parents, not covered by tests at all, probably broken
+        - '#Call to an undefined method Doctrine_Query::getQuery\(\)\.#'
+        # In Doctrine_Import_Sqlite:78, this function only seems to exist on the Doctrine_Formatter class, and I don't see any path from Doctrine_Connection
+        # to Doctrine_Formatter that would work here (no __call in Doctrine_Connection), not covered by tests
+        - '#Call to an undefined method Doctrine_Connection::fixSequenceName\(\)\.#'
+        # In Doctrine_Export_Mssql:346|375, similar to above, method exists on Doctrine_Formatter, not Doctrine_Connection (or any subclasses of)
+        # not covered by tests, probably broken.
+        - '#Call to an undefined method Doctrine_Connection::getSequenceName\(\)\.#'
+        # In Doctrine_Template_Listener_Sluggable:108, this is wrapped by a function_exists call, and looks like it's built so that a Doctrine_Record
+        # object can define that method to implement its own version of slug generation if desired by the implementer.
+        - '#Call to an undefined method Doctrine_Record::getUniqueSlug\(\)\.#'
+        # In Doctrine_Query_Orderby:107|162, these are both wrapped by a method_exists call, and this method is only defined on the
+        # Doctrine_Connection_Mssql class, should be safe.
+        - '#Call to an undefined method Doctrine_Connection::modifyOrderByColumn\(\)\.#'
+        # Both of these are in the "Experimental" Doctrine_Expression_Mysql|Pgsql blocks, not covered by tests. The methods exist on
+        # Doctrine_Formatter, not Doctrine_Connection
+        - '#Call to an undefined method Doctrine_Connection::escapePattern\(\)\.#'
+        - '#Call to an undefined method Doctrine_Connection::escape\(\)\.#'
+        # In Doctrine_Query_Abstract:2099, most of the classes that extend Doctrine_Query_Part implement this parse method but the base
+        # class does not. Should probably be made into an abstract method definition on that class (but would break API)
+        - '#Call to an undefined method Doctrine_Query_Part::parse\(\)\.#'

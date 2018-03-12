@@ -269,7 +269,7 @@ class Doctrine_Node_NestedSet extends Doctrine_Node implements Doctrine_Node_Int
     /**
      * gets ancestors for node
      *
-     * @param integer $deth  The depth 'upstairs'.
+     * @param integer $depth  The depth 'upstairs'.
      * @return mixed  The ancestors of the node or FALSE if the node has no ancestors (this
      *                basically means it's a root node).
      */
@@ -294,7 +294,7 @@ class Doctrine_Node_NestedSet extends Doctrine_Node implements Doctrine_Node_Int
      * gets path to node from root, uses record::toString() method to get node names
      *
      * @param string     $seperator     path seperator
-     * @param bool     $includeNode     whether or not to include node at end of path
+     * @param bool     $includeRecord     whether or not to include node at end of path
      * @return string     string representation of path
      */
     public function getPath($seperator = ' > ', $includeRecord = false)
@@ -1144,7 +1144,7 @@ class Doctrine_Node_NestedSet extends Doctrine_Node implements Doctrine_Node_Int
     /**
      * sets record's left value
      *
-     * @param int
+     * @param int $lft
      */
     public function setLeftValue($lft)
     {
@@ -1164,7 +1164,7 @@ class Doctrine_Node_NestedSet extends Doctrine_Node implements Doctrine_Node_Int
     /**
      * sets record's right value
      *
-     * @param int
+     * @param int $rgt
      */
     public function setRightValue($rgt)
     {
@@ -1208,7 +1208,7 @@ class Doctrine_Node_NestedSet extends Doctrine_Node implements Doctrine_Node_Int
     /**
      * sets records root id value
      *
-     * @param int
+     * @param int $value
      */
     public function setRootValue($value)
     {

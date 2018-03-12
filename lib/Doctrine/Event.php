@@ -29,6 +29,12 @@
  * @link        www.doctrine-project.org
  * @since       1.0
  * @version     $Revision$
+ * @property bool $skipOperation
+ * @property int $fetchMode
+ * @property int $cursorOrientation
+ * @property int $cursorOffset
+ * @property int $columnIndex
+ * @property mixed $data
  */
 class Doctrine_Event
 {
@@ -118,8 +124,7 @@ class Doctrine_Event
     /**
      * constructor
      *
-     * @param Doctrine_Connection|Doctrine_Connection_Statement|
-              Doctrine_Connection_UnitOfWork|Doctrine_Transaction $invoker   the handler which invoked this event
+     * @param Doctrine_Connection|Doctrine_Connection_Statement|Doctrine_Connection_UnitOfWork|Doctrine_Transaction $invoker   the handler which invoked this event
      * @param integer $code                                                  the event code
      * @param string $query                                                  the sql query associated with this event (if any)
      */
@@ -239,7 +244,7 @@ class Doctrine_Event
      * skips the next operation
      * an alias for __set('skipOperation', true)
      *
-     * @return Doctrine_Event   this object
+     * @return $this   this object
      */
     public function skipOperation()
     {
@@ -254,7 +259,7 @@ class Doctrine_Event
      *
      * @param string $option    the name of the option
      * @param mixed $value      the value of the given option
-     * @return Doctrine_Event   this object
+     * @return $this   this object
      */
     public function __set($option, $value)
     {
@@ -328,8 +333,7 @@ class Doctrine_Event
      * getInvoker
      * returns the handler that invoked this event
      *
-     * @return Doctrine_Connection|Doctrine_Connection_Statement|
-     *         Doctrine_Connection_UnitOfWork|Doctrine_Transaction   the handler that invoked this event
+     * @return Doctrine_Connection|Doctrine_Connection_Statement|Doctrine_Connection_UnitOfWork|Doctrine_Transaction   the handler that invoked this event
      */
     public function getInvoker()
     {

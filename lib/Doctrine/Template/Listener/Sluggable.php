@@ -42,7 +42,7 @@ class Doctrine_Template_Listener_Sluggable extends Doctrine_Record_Listener
     /**
      * __construct
      *
-     * @param string $array
+     * @param array $options
      * @return void
      */
     public function __construct(array $options)
