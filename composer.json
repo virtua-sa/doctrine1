@@ -13,7 +13,10 @@
         "psr-0": {
             "Doctrine_": "lib/",
             "sfYaml": "lib/Doctrine/Parser/sfYaml/"
-        }
+        },
+        "files": [
+            "lib/Doctrine.php"
+        ]
     },
     "include-path": [
         "lib/"

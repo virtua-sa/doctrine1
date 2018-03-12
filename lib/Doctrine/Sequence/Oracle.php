@@ -55,7 +55,7 @@ class Doctrine_Sequence_Oracle extends Doctrine_Sequence
                     throw new Doctrine_Sequence_Exception('on demand sequence ' . $seqName . ' could not be created');
                 }
 
-                return $this->nextId($seqName, false);
+                return $this->nextID($seqName, false);
             } else {
                 throw new Doctrine_Sequence_Exception('sequence ' .$seqName . ' does not exist');
             }

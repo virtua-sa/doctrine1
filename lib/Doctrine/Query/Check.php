@@ -38,11 +38,11 @@ class Doctrine_Query_Check
     protected $table;
 
     /**
-     * @var string $sql                     database specific sql CHECK constraint definition 
+     * @var string $sql                     database specific sql CHECK constraint definition
      *                                      parsed from the given dql CHECK definition
      */
     protected $sql;
-    
+
     protected $_tokenizer;
 
     /**
@@ -87,7 +87,7 @@ class Doctrine_Query_Check
      * @param string $alias     component alias
      * @param string $field     the field name
      * @param mixed $value      the value of the field
-     * @return void
+     * @return string
      */
     public function parseClause($dql)
     {
@@ -116,11 +116,11 @@ class Doctrine_Query_Check
         }
         return '(' . $r . ')';
     }
-    
+
     public function parseSingle($part)
     {
         $e = explode(' ', $part);
-        
+
         $e[0] = $this->parseFunction($e[0]);
 
         switch ($e[1]) {
@@ -138,18 +138,18 @@ class Doctrine_Query_Check
         return implode(' ', $e);
     }
 
-    public function parseFunction($dql) 
+    public function parseFunction($dql)
     {
         if (($pos = strpos($dql, '(')) !== false) {
             $func  = substr($dql, 0, $pos);
             $value = substr($dql, ($pos + 1), -1);
-            
+
             $expr  = $this->table->getConnection()->expression;
 
             if ( ! method_exists($expr, $func)) {
                 throw new Doctrine_Query_Exception('Unknown function ' . $func);
             }
-            
+
             $func  = $expr->$func($value);
         }
         return $func;

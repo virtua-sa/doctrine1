@@ -52,6 +52,26 @@
  * @version     $Revision: 7490 $
  * @author      Konsta Vesterinen <kvesteri@cc.hut.fi>
  * @author      Lukas Smith <smith@pooteeweet.org> (MDB2 library)
+ *
+ * From $modules array
+ * @property Doctrine_Formatter $formatter
+ * @property Doctrine_Connection_UnitOfWork $unitOfWork
+ * @property Doctrine_Transaction $transaction
+ * @property Doctrine_Expression_Driver $expression
+ * @property Doctrine_DataDict $dataDict
+ * @property Doctrine_Export $export
+ * @property Doctrine_Import $import
+ * @property Doctrine_Sequence $sequence
+ * @property Doctrine_Util $util
+ *
+ * From $properties array
+ * @property array $identifier_quoting
+ * @property int $max_identifier_length
+ * @property array $sql_comments
+ * @property string $sql_file_delimiter
+ * @property array $string_quoting
+ * @property int $varchar_max_length
+ * @property array $wildcards
  */
 abstract class Doctrine_Connection extends Doctrine_Configurable implements Countable, IteratorAggregate, Serializable
 {
@@ -249,7 +269,7 @@ abstract class Doctrine_Connection extends Doctrine_Configurable implements Coun
      * Retrieves option
      *
      * @param string $option
-     * @return void
+     * @return mixed
      */
     public function getOption($option)
     {
@@ -376,7 +396,7 @@ abstract class Doctrine_Connection extends Doctrine_Configurable implements Coun
      *
      * Gets the name of the instance driver
      *
-     * @return void
+     * @return string
      */
     public function getDriverName()
     {
@@ -394,7 +414,7 @@ abstract class Doctrine_Connection extends Doctrine_Configurable implements Coun
      * @see Doctrine_Connection::$modules       all availible modules
      * @param string $name                      the name of the module to get
      * @throws Doctrine_Connection_Exception    if trying to get an unknown module
-     * @return Doctrine_Connection_Module       connection module
+     * @return mixed       connection module
      */
     public function __get($name)
     {
@@ -1490,7 +1510,7 @@ abstract class Doctrine_Connection extends Doctrine_Configurable implements Coun
      * This value is set in the Doctrine_Export_{DRIVER} classes if required
      *
      * @param string $info
-     * @return void
+     * @return Doctrine_Connection
      */
     public function getTmpConnection($info)
     {

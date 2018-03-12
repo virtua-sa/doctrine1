@@ -404,7 +404,11 @@ class Doctrine_Connection_Mssql extends Doctrine_Connection_Common
      * @param string $query
      * @param array $params
      */
-    protected function replaceBoundParamsWithInlineValuesInQuery($query, array $params) {
+    protected function replaceBoundParamsWithInlineValuesInQuery($query, array $params)
+    {
+        // $value was previously undefined, this defines it for static analysis.
+        // Closure below uses it, expecting it to be set from the last iteration of the foreach below
+        $value = null;
 
         foreach($params as $key => $value) {
             $re = '/(?<=WHERE|VALUES|SET|JOIN)(.*?)(\?)/';

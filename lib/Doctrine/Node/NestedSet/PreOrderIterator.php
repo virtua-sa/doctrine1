@@ -67,6 +67,12 @@ class Doctrine_Node_NestedSet_PreOrderIterator implements Iterator
      */
     protected $count;
 
+    // These were undefined, added for static analysis and set to public so api isn't changed
+    public $level;
+    public $maxLevel;
+    public $options;
+    public $prevLeft;
+
     public function __construct($record, $opts)
     {
         $componentName = $record->getTable()->getComponentName();
@@ -79,7 +85,7 @@ class Doctrine_Node_NestedSet_PreOrderIterator implements Iterator
         } else {
             $query = $q->where("$componentName.lft > ? AND $componentName.rgt < ?", $params)->orderBy("$componentName.lft asc");
         }
-        
+
         $query = $record->getTable()->getTree()->returnQueryWithRootId($query, $record->getNode()->getRootValue());
 
         $this->maxLevel   = isset($opts['depth']) ? ($opts['depth'] + $record->getNode()->getLevel()) : 0;

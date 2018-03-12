@@ -236,7 +236,7 @@ class Doctrine_Adapter_Statement_Oracle implements Doctrine_Adapter_Statement_In
 
         if ($oci_error) {
             //store the error
-            $this->oci_errors[] = $oci_error;
+            $this->ociErrors[] = $oci_error;
         } else if (count($this->ociErrors) > 0) {
             $oci_error = $this->ociErrors[count($this->ociErrors)-1];
         }
@@ -419,6 +419,9 @@ class Doctrine_Adapter_Statement_Oracle implements Doctrine_Adapter_Statement_In
         if ($row === false) {
             return false;
         }
+
+        // gets overwritten by eval'd code
+        $object = new stdClass();
 
         $instantiation_code = "\$object = new $className(";
         $firstParam=true;
