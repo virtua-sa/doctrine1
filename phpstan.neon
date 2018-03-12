@@ -174,3 +174,11 @@ parameters:
         # In Doctrine_Query_Abstract:2099, most of the classes that extend Doctrine_Query_Part implement this parse method but the base
         # class does not. Should probably be made into an abstract method definition on that class (but would break API)
         - '#Call to an undefined method Doctrine_Query_Part::parse\(\)\.#'
+
+        #########
+        # Level 3
+        #########
+        # This one calls execute with the HYDRATE_ARRAY constant, which should return an array
+        - '#Method Doctrine_Query::fetchArray\(\) should return array but returns array\|Doctrine_Collection\.#'
+        # This one does not allow specifying the hydration mode, so should default to Doctrine_Collection (record hydration)
+        - '#Method Doctrine_IntegrityMapper::buildIntegrityRelationQuery\(\) should return Doctrine_Collection but returns array\|Doctrine_Collection\.#'

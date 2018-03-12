@@ -45,7 +45,7 @@ class Doctrine_Export_Mysql extends Doctrine_Export
      * @param string    $table        name of table that should be used in method
      * @param string    $name         name of the constraint to be dropped
      * @param string    $primary      hint if the constraint is primary
-     * @return void
+     * @return int
      */
     public function dropConstraint($table, $name, $primary = false)
     {
@@ -64,7 +64,7 @@ class Doctrine_Export_Mysql extends Doctrine_Export
      * createDatabaseSql
      *
      * @param string $name
-     * @return void
+     * @return string
      */
     public function createDatabaseSql($name)
     {
@@ -118,7 +118,7 @@ class Doctrine_Export_Mysql extends Doctrine_Export
      *                              'type'    => 'innodb',
      *                          );
      *
-     * @return void
+     * @return array
      */
     public function createTableSql($name, array $fields, array $options = array())
     {
@@ -388,7 +388,7 @@ class Doctrine_Export_Mysql extends Doctrine_Export
      * @param boolean $check     indicates whether the function should just check if the DBMS driver
      *                           can perform the requested table alterations if the value is true or
      *                           actually perform them otherwise.
-     * @return boolean
+     * @return boolean|string
      */
     public function alterTableSql($name, array $changes, $check = false)
     {
@@ -590,7 +590,7 @@ class Doctrine_Export_Mysql extends Doctrine_Export
      *                                        )
      *                                    )
      * @throws PDOException
-     * @return void
+     * @return string
      */
     public function createIndexSql($table, $name, array $definition)
     {
@@ -786,7 +786,7 @@ class Doctrine_Export_Mysql extends Doctrine_Export
      *
      * @param string    $table          name of table that should be used in method
      * @param string    $name           name of the index to be dropped
-     * @return void
+     * @return string
      */
     public function dropIndexSql($table, $name)
     {
@@ -800,7 +800,7 @@ class Doctrine_Export_Mysql extends Doctrine_Export
      *
      * @param string    $table          name of table that should be dropped from the database
      * @throws PDOException
-     * @return void
+     * @return string
      */
     public function dropTableSql($table)
     {
@@ -813,7 +813,7 @@ class Doctrine_Export_Mysql extends Doctrine_Export
      *
      * @param string    $table        name of table that should be used in method
      * @param string    $name         name of the foreign key to be dropped
-     * @return void
+     * @return int
      */
     public function dropForeignKey($table, $name)
     {

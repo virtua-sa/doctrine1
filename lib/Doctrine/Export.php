@@ -102,7 +102,7 @@ class Doctrine_Export extends Doctrine_Connection_Module
      *
      * @param string    $table        name of table that should be used in method
      * @param string    $name         name of the index to be dropped
-     * @return void
+     * @return int
      */
     public function dropIndex($table, $name)
     {
@@ -144,7 +144,7 @@ class Doctrine_Export extends Doctrine_Connection_Module
      *
      * @param string    $table        name of table that should be used in method
      * @param string    $name         name of the foreign key to be dropped
-     * @return void
+     * @return int
      */
     public function dropForeignKey($table, $name)
     {
@@ -158,7 +158,7 @@ class Doctrine_Export extends Doctrine_Connection_Module
      *
      * @throws Doctrine_Connection_Exception     if something fails at database level
      * @param string $sequenceName      name of the sequence to be dropped
-     * @return void
+     * @return int
      */
     public function dropSequence($sequenceName)
     {
@@ -228,7 +228,7 @@ class Doctrine_Export extends Doctrine_Connection_Module
      *                          );
      * @param array $options  An associative array of table options:
      *
-     * @return string
+     * @return array
      */
     public function createTableSql($name, array $fields, array $options = array())
     {
@@ -371,7 +371,7 @@ class Doctrine_Export extends Doctrine_Connection_Module
      *                                            'last_login' => array()
      *                                        )
      *                                    )
-     * @return void
+     * @return int
      */
     public function createConstraint($table, $name, $definition)
     {
@@ -451,7 +451,7 @@ class Doctrine_Export extends Doctrine_Connection_Module
      *                                            'last_login' => array()
      *                                        )
      *                                    )
-     * @return void
+     * @return Doctrine_Adapter_Statement|PDOStatement
      */
     public function createIndex($table, $name, array $definition)
     {
@@ -515,7 +515,7 @@ class Doctrine_Export extends Doctrine_Connection_Module
      *
      * @param string    $table         name of the table on which the foreign key is to be created
      * @param array     $definition    associative array that defines properties of the foreign key to be created.
-     * @return string
+     * @return Doctrine_Adapter_Statement|PDOStatement
      */
     public function createForeignKey($table, array $definition)
     {

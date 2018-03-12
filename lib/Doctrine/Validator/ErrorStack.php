@@ -87,6 +87,7 @@ class Doctrine_Validator_ErrorStack extends Doctrine_Access implements Countable
      * Removes all existing errors for the specified field from the stack.
      *
      * @param string $fieldName
+     * @return void
      */
     public function remove($fieldName)
     {

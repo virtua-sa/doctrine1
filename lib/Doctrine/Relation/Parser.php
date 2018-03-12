@@ -123,7 +123,7 @@ class Doctrine_Relation_Parser
      *
      * @param string $name
      * @param array $options
-     * @return void
+     * @return array
      */
     public function bind($name, $options = array())
     {

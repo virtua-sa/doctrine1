@@ -36,7 +36,7 @@ class Doctrine_Search_Query
     /**
      * @var Doctrine_Table $_table          the index table
      */
-    protected $_table = array();
+    protected $_table;
 
     protected $_sql = '';
 

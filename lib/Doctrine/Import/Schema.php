@@ -166,7 +166,7 @@ class Doctrine_Import_Schema
      * getOption
      *
      * @param string $name
-     * @return void
+     * @return mixed
      */
     public function getOption($name)
     {

@@ -218,7 +218,7 @@ class Doctrine_Adapter_Statement_Oracle implements Doctrine_Adapter_Statement_In
      * Fetch extended error information associated with the last operation on the statement handle
      *
      * @see Doctrine_Adapter_Interface::errorInfo()
-     * @return array        error info array
+     * @return string
      */
     public function errorInfo()
     {
@@ -388,7 +388,7 @@ class Doctrine_Adapter_Statement_Oracle implements Doctrine_Adapter_Statement_In
      *                                      value is supplied, Doctrine_Adapter_Statement_Interface->fetchColumn()
      *                                      fetches the first column.
      *
-     * @return string                       returns a single column in the next row of a result set.
+     * @return string|false                       returns a single column in the next row of a result set.
      */
     public function fetchColumn($columnIndex = 0)
     {

@@ -436,7 +436,7 @@ class Doctrine_Connection_Mssql extends Doctrine_Connection_Common
      * @param Doctrine_Table $table     The table to insert data into.
      * @param array $fields             An associative array containing column-value pairs.
      *                                  Values can be strings or Doctrine_Expression instances.
-     * @return integer                  the number of affected rows. Boolean false if empty value array was given,
+     * @return integer|false                  the number of affected rows. Boolean false if empty value array was given,
      */
     public function insert(Doctrine_Table $table, array $fields)
     {

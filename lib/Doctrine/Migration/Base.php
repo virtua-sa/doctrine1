@@ -73,7 +73,7 @@ abstract class Doctrine_Migration_Base
      *
      * @param string $type    The type of change
      * @param array  $change   The array of information for the change
-     * @return void
+     * @return array
      */
     protected function _addChange($type, array $change = array())
     {
@@ -239,7 +239,7 @@ abstract class Doctrine_Migration_Base
      *  * Change autoincrement = true field to be autoincrement
      *
      * @param string $tableName     Name of the table
-     * @param string $columnNames   Array of column names and column definitions
+     * @param array $columnNames   Array of column names and column definitions
      * @return void
      */
     public function createPrimaryKey($tableName, $columnNames)

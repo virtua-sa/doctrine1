@@ -552,7 +552,7 @@ class Doctrine_Pager
      *
      * @param array $params               Optional parameters to Doctrine_Query::execute
      * @param int $hydrationMode        Hydration Mode of Doctrine_Query::execute returned ResultSet.
-     * @return Doctrine_Collection  The root collection
+     * @return Doctrine_Collection|array  The root collection
      */
     public function execute($params = array(), $hydrationMode = null)
     {

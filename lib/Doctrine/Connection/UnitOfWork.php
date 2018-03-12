@@ -44,7 +44,7 @@ class Doctrine_Connection_UnitOfWork extends Doctrine_Connection_Module
      * (The save() operation is always cascaded in 0.10/1.0).
      *
      * @param Doctrine_Record $record
-     * @return void
+     * @return bool
      */
     public function saveGraph(Doctrine_Record $record, $replace = false)
     {
@@ -194,6 +194,7 @@ class Doctrine_Connection_UnitOfWork extends Doctrine_Connection_Module
      * (usually triggered through $record->delete()).
      *
      * @param array $deletions  Map of the records to delete. Keys=Oids Values=Records.
+     * @return true
      */
     private function _executeDeletions(array $deletions)
     {

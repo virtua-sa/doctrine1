@@ -64,7 +64,7 @@ class Doctrine_Cli
     private $_registeredTask = array();
 
     /**
-     * @var object Doctrine_Task
+     * @var Doctrine_Task
      */
     private $_taskInstance;
 

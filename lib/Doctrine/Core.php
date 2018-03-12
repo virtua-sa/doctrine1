@@ -835,7 +835,7 @@ class Doctrine_Core
      * @param string $directory Directory to write your models to
      * @param array $connections Array of connection names to generate models for
      * @param array $options Array of options
-     * @return boolean
+     * @return array
      * @throws Exception
      */
     public static function generateModelsFromDb($directory, array $connections = array(), array $options = array())
@@ -946,7 +946,7 @@ class Doctrine_Core
      *
      * @param string $yamlPath Path to your yaml schema files
      * @param string $directory Directory to generate your models in
-     * @return void
+     * @return int|false|string
      */
     public static function generateYamlFromModels($yamlPath, $directory)
     {
@@ -1011,7 +1011,7 @@ class Doctrine_Core
      *
      * @param string $migrationsPath Path to migrations directory which contains your migration classes
      * @param string $to Version you wish to migrate to.
-     * @return bool true
+     * @return bool|int
      * @throws new Doctrine_Migration_Exception
      */
     public static function migrate($migrationsPath, $to = null)
@@ -1054,7 +1054,7 @@ class Doctrine_Core
      * @param string  $migrationsPath Path to your Doctrine migration classes
      * @param string  $modelsPath     Path to your Doctrine model classes
      * @param integer $modelLoading   Style of model loading to use for loading the models in order to generate migrations
-     * @return void
+     * @return bool
      */
     public static function generateMigrationsFromModels($migrationsPath, $modelsPath = null, $modelLoading = null)
     {
@@ -1196,7 +1196,7 @@ class Doctrine_Core
      * @param mixed $var        a variable of any type
      * @param boolean $output   whether to output the content
      * @param string $indent    indention string
-     * @return void|string
+     * @return string
      */
     public static function dump($var, $output = true, $indent = "")
     {

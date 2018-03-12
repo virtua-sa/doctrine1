@@ -90,7 +90,7 @@ class Doctrine_Template_Versionable extends Doctrine_Template
     /**
      * Get plugin for Versionable template
      *
-     * @return void
+     * @return Doctrine_AuditLog
      */
     public function getAuditLog()
     {

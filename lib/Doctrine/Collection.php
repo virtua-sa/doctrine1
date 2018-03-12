@@ -49,7 +49,7 @@ class Doctrine_Collection extends Doctrine_Access implements Countable, Iterator
     protected $_snapshot = array();
 
     /**
-     * @var Doctrine_Record $reference      collection can belong to a record
+     * @var Doctrine_Record|null $reference      collection can belong to a record
      */
     protected $reference;
 
@@ -306,7 +306,7 @@ class Doctrine_Collection extends Doctrine_Access implements Countable, Iterator
      * Removes a specified collection element
      *
      * @param mixed $key
-     * @return boolean
+     * @return mixed the data that was removed
      */
     public function remove($key)
     {
@@ -331,7 +331,7 @@ class Doctrine_Collection extends Doctrine_Access implements Countable, Iterator
      * Search a Doctrine_Record instance
      *
      * @param Doctrine_Record $record
-     * @return void
+     * @return mixed
      */
     public function search(Doctrine_Record $record)
     {
@@ -523,7 +523,7 @@ class Doctrine_Collection extends Doctrine_Access implements Countable, Iterator
      * Load all relationships or the named relationship passed
      *
      * @param mixed $name
-     * @return boolean
+     * @return boolean|null
      */
     public function loadRelated($name = null)
     {
@@ -561,7 +561,7 @@ class Doctrine_Collection extends Doctrine_Access implements Countable, Iterator
         }
 
         if ( ! $list) {
-            return;
+            return null;
         }
 
         $dql     = $rel->getRelationDql(count($list), 'collection');
@@ -774,7 +774,7 @@ class Doctrine_Collection extends Doctrine_Access implements Countable, Iterator
     /**
      * Populate a Doctrine_Collection from an array of data
      *
-     * @param string $array
+     * @param array $array
      * @return void
      */
     public function fromArray($array, $deep = true)
@@ -821,7 +821,7 @@ class Doctrine_Collection extends Doctrine_Access implements Countable, Iterator
      *
      * @param string $type
      * @param string $deep
-     * @return void
+     * @return mixed
      */
     public function exportTo($type, $deep = true)
     {

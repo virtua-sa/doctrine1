@@ -433,7 +433,7 @@ class Doctrine_Query extends Doctrine_Query_Abstract implements Countable
      *
      * @throws Doctrine_Query_Exception     if unknown component alias has been given
      * @param string $componentAlias        the alias of the component
-     * @return string SQL code
+     * @return string|null SQL code
      * @todo Description: What is a 'pending field' (and are there non-pending fields, too)?
      *       What is 'processed'? (Meaning: What information is gathered & stored away)
      */
@@ -449,7 +449,7 @@ class Doctrine_Query extends Doctrine_Query_Abstract implements Countable
                             . " must have at least one field selected.");
                 }
             }
-            return;
+            return null;
         }
 
         // At this point we know the component is FETCHED (either it's the base class of
@@ -696,7 +696,7 @@ class Doctrine_Query extends Doctrine_Query_Abstract implements Countable
      * 4. Quotes all identifiers
      * 5. Parses nested clauses and subqueries recursively
      *
-     * @return string   SQL string
+     * @return string|int   SQL string
      * @todo Description: What is a 'dql clause' (and what not)?
      *       Refactor: Too long & nesting level
      */
@@ -1133,7 +1133,7 @@ class Doctrine_Query extends Doctrine_Query_Abstract implements Countable
      * @param array $params             an array of prepared statement params (needed only in mysql driver
      *                                  when limit subquery algorithm is used)
      * @param bool $limitSubquery Whether or not to try and apply the limit subquery algorithm
-     * @return string                   the built sql query
+     * @return string|false                   the built sql query
      */
     public function getSqlQuery($params = array(), $limitSubquery = true)
     {
@@ -1156,7 +1156,7 @@ class Doctrine_Query extends Doctrine_Query_Abstract implements Countable
      * Build the SQL query from the DQL
      *
      * @param bool $limitSubquery Whether or not to try and apply the limit subquery algorithm
-     * @return string $sql The generated SQL string
+     * @return string|false $sql The generated SQL string
      */
     public function buildSqlQuery($limitSubquery = true)
     {

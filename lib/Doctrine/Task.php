@@ -95,7 +95,7 @@ abstract class Doctrine_Task
      * notify
      *
      * @param string $notification
-     * @return void
+     * @return false|string
      */
     public function notify($notification = null)
     {

@@ -117,7 +117,7 @@ class Doctrine_Cache_Db extends Doctrine_Cache_Driver
      * @param string $id        cache id
      * @param string $data      data to cache
      * @param int $lifeTime     if != false, set a specific lifetime for this cache record (null => infinite lifeTime)
-     * @return boolean true if no problem
+     * @return int
      */
     protected function _doSave($id, $data, $lifeTime = false, $saveKey = true)
     {
@@ -156,7 +156,7 @@ class Doctrine_Cache_Db extends Doctrine_Cache_Driver
      * drivers and used in Doctrine_Cache_Driver::delete()
      *
      * @param string $id cache id
-     * @return boolean true if no problem
+     * @return int
      */
     protected function _doDelete($id)
     {
@@ -198,7 +198,7 @@ class Doctrine_Cache_Db extends Doctrine_Cache_Driver
      * it is returned as is.
      *
      * @param string $hex
-     * @return string $binary
+     * @return string|null $binary
      */
     protected function _hex2bin($hex)
     {

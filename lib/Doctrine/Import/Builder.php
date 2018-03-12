@@ -832,7 +832,7 @@ class Doctrine_Import_Builder extends Doctrine_Builder
     /**
      * Build php code for adding record listeners
      *
-     * @param string $listeners
+     * @param array $listeners
      * @return string $build
      */
     public function buildListeners($listeners)

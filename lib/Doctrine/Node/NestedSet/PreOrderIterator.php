@@ -115,7 +115,7 @@ class Doctrine_Node_NestedSet_PreOrderIterator implements Iterator
     /**
      * returns the current key
      *
-     * @return integer
+     * @return mixed
      */
     public function key()
     {
@@ -137,7 +137,7 @@ class Doctrine_Node_NestedSet_PreOrderIterator implements Iterator
     /**
      * advances the internal pointer
      *
-     * @return void
+     * @return false|Doctrine_Record
      */
     public function next()
     {
@@ -160,11 +160,17 @@ class Doctrine_Node_NestedSet_PreOrderIterator implements Iterator
         return ($this->index < $this->count);
     }
 
+    /**
+     * @return int
+     */
     public function count()
     {
         return $this->count;
     }
 
+    /**
+     * @return void
+     */
     private function updateLevel()
     {
         if ( ! (isset($this->options['include_record']) && $this->options['include_record'] && $this->index == 0)) {
@@ -174,6 +180,9 @@ class Doctrine_Node_NestedSet_PreOrderIterator implements Iterator
         }
     }
 
+    /**
+     * @return false|Doctrine_Record
+     */
     private function advanceIndex()
     {
         $this->index++;
