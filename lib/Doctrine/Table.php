@@ -1513,7 +1513,7 @@ class Doctrine_Table extends Doctrine_Configurable implements Countable
     /**
      * Returns the connection associated with this table (if any).
      *
-     * @return Doctrine_Connection|null     the connection object
+     * @return Doctrine_Connection     the connection object
      */
     public function getConnection()
     {

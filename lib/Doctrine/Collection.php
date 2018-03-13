@@ -295,7 +295,7 @@ class Doctrine_Collection extends Doctrine_Access implements Countable, Iterator
     /**
      * Get reference to Doctrine_Record instance
      *
-     * @return Doctrine_Record $reference
+     * @return Doctrine_Record|null $reference
      */
     public function getReference()
     {

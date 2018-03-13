@@ -91,7 +91,7 @@ class Doctrine_Event
     protected $_invoker;
 
     /**
-     * @var string|Doctrine_Query_Abstract $_query              the sql query associated with this event (if any)
+     * @var string|Doctrine_Query_Abstract|null $_query              the sql query associated with this event (if any)
      */
     protected $_query;
 
@@ -140,7 +140,7 @@ class Doctrine_Event
     /**
      * getQuery
      *
-     * @return string|Doctrine_Query_Abstract       returns the query associated with this event (if any)
+     * @return string|Doctrine_Query_Abstract|null       returns the query associated with this event (if any)
      */
     public function getQuery()
     {
