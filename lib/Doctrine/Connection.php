@@ -216,7 +216,7 @@ abstract class Doctrine_Connection extends Doctrine_Configurable implements Coun
      * the constructor
      *
      * @param Doctrine_Manager $manager                 the manager object
-     * @param PDO|Doctrine_Adapter_Interface $adapter   database driver
+     * @param PDO|Doctrine_Adapter_Interface|array $adapter   database driver
      */
     public function __construct(Doctrine_Manager $manager, $adapter, $user = null, $pass = null)
     {
@@ -933,6 +933,7 @@ abstract class Doctrine_Connection extends Doctrine_Configurable implements Coun
      * prepare
      *
      * @param string $statement
+     * @return Doctrine_Connection_Statement
      */
     public function prepare($statement)
     {
@@ -995,7 +996,7 @@ abstract class Doctrine_Connection extends Doctrine_Configurable implements Coun
      * @param string $query
      * @param integer $limit
      * @param integer $offset
-     * @return PDOStatement|Doctrine_Adapter_Statement
+     * @return PDOStatement|Doctrine_Adapter_Statement_Interface
      */
     public function select($query, $limit = 0, $offset = 0)
     {
@@ -1011,7 +1012,7 @@ abstract class Doctrine_Connection extends Doctrine_Configurable implements Coun
      * @param string $query     sql query
      * @param array $params     query parameters
      *
-     * @return PDOStatement|Doctrine_Adapter_Statement
+     * @return PDOStatement|Doctrine_Adapter_Statement_Interface
      */
     public function standaloneQuery($query, $params = array())
     {
@@ -1023,7 +1024,7 @@ abstract class Doctrine_Connection extends Doctrine_Configurable implements Coun
      * @param string $query     sql query
      * @param array $params     query parameters
      *
-     * @return PDOStatement|Doctrine_Adapter_Statement
+     * @return PDOStatement|Doctrine_Adapter_Statement_Interface
      */
     public function execute($query, array $params = array())
     {

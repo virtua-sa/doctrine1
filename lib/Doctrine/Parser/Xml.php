@@ -54,7 +54,7 @@ class Doctrine_Parser_Xml extends Doctrine_Parser
      *
      * @param  array $array        Array to convert to xml
      * @param  string $rootNodeName Name of the root node
-     * @param  string $xml          SimpleXmlElement
+     * @param  SimpleXMLElement|null $xml          SimpleXmlElement, if null SimpleXMLElement will be created
      * @return string $asXml        String of xml built from array
      */
     public static function arrayToXml($array, $rootNodeName = 'data', $xml = null, $charset = null)

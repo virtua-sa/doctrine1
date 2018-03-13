@@ -42,7 +42,7 @@ class Doctrine_Transaction_Sqlite extends Doctrine_Transaction
      *                  SERIALIZABLE (prevents phantom reads)
      * @throws PDOException                         if something fails at the PDO level
      * @throws Doctrine_Transaction_Exception       if using unknown isolation level
-     * @return Doctrine_Adapter_Statement|PDOStatement
+     * @return PDOStatement|Doctrine_Adapter_Statement_Interface
      */
     public function setIsolation($isolation)
     {

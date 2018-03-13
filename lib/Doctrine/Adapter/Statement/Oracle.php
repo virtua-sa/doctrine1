@@ -388,7 +388,7 @@ class Doctrine_Adapter_Statement_Oracle implements Doctrine_Adapter_Statement_In
      *                                      value is supplied, Doctrine_Adapter_Statement_Interface->fetchColumn()
      *                                      fetches the first column.
      *
-     * @return string|false                       returns a single column in the next row of a result set.
+     * @return mixed|false                       returns a single column in the next row of a result set.
      */
     public function fetchColumn($columnIndex = 0)
     {

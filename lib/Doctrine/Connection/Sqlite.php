@@ -39,6 +39,11 @@ class Doctrine_Connection_Sqlite extends Doctrine_Connection_Common
     protected $driverName = 'Sqlite';
 
     /**
+     * @var PDO  $dbh                                the database handler
+     */
+    protected $dbh;
+
+    /**
      * the constructor
      *
      * @param Doctrine_Manager $manager

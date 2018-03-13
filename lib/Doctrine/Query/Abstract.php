@@ -115,7 +115,7 @@ abstract class Doctrine_Query_Abstract
 
     /* Caching properties */
     /**
-     * @var Doctrine_Cache_Interface|true  The cache driver used for caching result sets.
+     * @var Doctrine_Cache_Interface|true|null  The cache driver used for caching result sets.
      */
     protected $_resultCache;
 
@@ -129,12 +129,14 @@ abstract class Doctrine_Query_Abstract
      *                                   expire the result cache.
      */
     protected $_expireResultCache = false;
+
     protected $_resultCacheTTL;
 
     /**
-     * @var Doctrine_Cache_Interface|bool  The cache driver used for caching queries.
+     * @var Doctrine_Cache_Interface|bool|null  The cache driver used for caching queries.
      */
     protected $_queryCache;
+
     protected $_expireQueryCache = false;
     protected $_queryCacheTTL;
 
@@ -930,7 +932,7 @@ abstract class Doctrine_Query_Abstract
      * _execute
      *
      * @param array $params
-     * @return PDOStatement|Doctrine_Adapter_Statement|int  The executed PDOStatement.
+     * @return PDOStatement|Doctrine_Adapter_Statement_Interface|int  The executed PDOStatement.
      */
     protected function _execute($params)
     {
@@ -1857,7 +1859,7 @@ abstract class Doctrine_Query_Abstract
     /**
      * useResultCache
      *
-     * @param Doctrine_Cache_Interface|bool $driver      cache driver
+     * @param Doctrine_Cache_Interface|true|null $driver      cache driver
      * @param integer $timeToLive                        how long the cache entry is valid
      * @param string $resultCacheHash                     The key to use for storing the queries result cache entry
      * @return $this         this object
@@ -1906,7 +1908,7 @@ abstract class Doctrine_Query_Abstract
     /**
      * useQueryCache
      *
-     * @param Doctrine_Cache_Interface|bool $driver      cache driver
+     * @param Doctrine_Cache_Interface|bool|null $driver      cache driver
      * @param integer $timeToLive                        how long the cache entry is valid
      * @return $this         this object
      */
@@ -2004,7 +2006,7 @@ abstract class Doctrine_Query_Abstract
      * getResultCacheDriver
      * returns the cache driver used for caching result sets
      *
-     * @return Doctrine_Cache_Interface|boolean|null    cache driver
+     * @return Doctrine_Cache_Interface   cache driver
      */
     public function getResultCacheDriver()
     {
@@ -2019,7 +2021,7 @@ abstract class Doctrine_Query_Abstract
      * getQueryCacheDriver
      * returns the cache driver used for caching queries
      *
-     * @return Doctrine_Cache_Interface|boolean|null    cache driver
+     * @return Doctrine_Cache_Interface    cache driver
      */
     public function getQueryCacheDriver()
     {
