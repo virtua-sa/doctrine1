@@ -67,3 +67,61 @@ parameters:
         # This is defined in Doctrine_Hydrator, but not Doctrine_Hydrator_Abstract (which both Doctrine_Hydrator and Doctrine_Hydrator_Graph extend)
         # Should probably be defined in the Abstract
         - '#Access to an undefined property Doctrine_Hydrator_Graph::\$_rootAlias\.#'
+        #########
+        # Level 1
+        #########
+        # Missing extensions
+        - '#Constant MEMCACHE_COMPRESSED not found\.#'
+        - '#Constant XC_TYPE_VAR not found\.#'
+        - '#Constant OCI_.+ not found\.#'
+        - '#Constant SQLT_CHR not found\.#'
+        # This isset check could probably be removed (Doctrine_I18n:124) because the method that is called to set `$others` already does an
+        # isset check on the value it returns and throws an exception if it's not set
+        - '#Variable \$others in isset\(\) always exists and is not nullable\.#'
+        # The block for this is a bit confusing (Doctrine_Connection_UnitOfWork:831), but $rootRecord is set on the first
+        # iteration of the foreach loop, and then referenced in each subsequent iteration. Assuming this is intentional
+        - '#Variable \$rootRecord might not be defined\.#'
+        # Not really sure what a satisfactory default value for $oci_length should be, seems that it should maybe be set to the $length parameter
+        # but not certain (Doctrine_Adapter_Statement_Oracle:175)
+        - '#Variable \$oci_length might not be defined\.#'
+        # This one would require some testing to see if it can be predefined, as it's predefined as "null" in a specific case, but undefined otherwise
+        # (though is_null will return true for undefined variables (but throws a notice), so perhaps it doesn't matter if it's set to null.
+        # Doctrine_Hydrator_Graph:131
+        - '#Variable \$activeRootIdentifier might not be defined\.#'
+        # These four are only used if the $autoincrement var is set to "true", and if it's set to "true", they get defined.
+        # In Doctrine_Migration_Base:278
+        - '#Variable \$autoincrementColumn might not be defined\.#'
+        - '#Variable \$autoincrementType might not be defined\.#'
+        - '#Variable \$autoincrementLength might not be defined\.#'
+        - '#Variable \$autoincrementOptions might not be defined\.#'
+        # These three happen several times in Doctrine_Node_NestedSet and each are structured the same way. The docblocks say something to the
+        # effect of "gets record of ... or empty record". The way the code is now, they return null (undefined variable) if the record doesn't exist,
+        # not an empty record. Could return an empty Doctrine_Record here, but not sure how that would affect behavior.
+        - '#Variable \$sibling might not be defined\.#'
+        - '#Variable \$child might not be defined\.#'
+        # (this one belongs to the previous group as well, not easy to tell phpstan to ignore specific errors in specific files)
+        # This one shows up in both Doctrine_Query and Doctrine_RawSql and is pretty much the same situation. I'm not sure what a good default
+        # for parent should be (though in this case it's probably being passed as null in all situations since it could be undefined)
+        - '#Variable \$parent might not be defined\.#'
+        # This one refers specifically to Doctrine_Connection:1040. In some cases $stmt is defined in an if block with no else, so would probably be safe
+        # to set to null in this case
+        - '#Variable \$stmt might not be defined\.#'
+        # Similar to the one above in Doctrine_Connection:1075
+        - '#Variable \$count might not be defined\.#'
+        # This, in Doctrine_RawSql:160|167|168|173, is intentional when tokenizing so that data is appended to the previous $type (during loop)
+        - '#Variable \$type might not be defined\.#'
+        # Doctrine_Relation_Parser:512, $table must always be set since nobody that has cared has complained about this, but seems like it should
+        # either be set to an initial value, or have an isset() check around it. There's a comment questioning if it should be $table or $this->table
+        - '#Variable \$table might not be defined\.#'
+        # Doctrine_Query_Check:155, this one doesn't really matter much, as it'll just return null/undefined if it doesn't get set, could initialize as null
+        # perhaps to make phpstan happy
+        - '#Variable \$func might not be defined\.#'
+        # In Doctrine_Table:506, seems to change $this->_identifier from an array to the last value of that array, intentional?  $pk won't be defined if
+        # $this->_identifier is empty
+        - '#Variable \$pk might not be defined\.#'
+        # In Doctrine_Query_Tokenizer:90, this seems to be intentional to add parts of the query to the previous type until a new token is found
+        - '#Variable \$p might not be defined\.#'
+        # Doctrine_Query:981|988|990|1195, not sure what good defaults should be (assuming blank string for most of these is what's happening now)
+        - '#Variable \$tableAlias might not be defined\.#'
+        - '#Variable \$componentAlias might not be defined\.#'
+        - '#Variable \$queryComponentsBefore might not be defined\.#'

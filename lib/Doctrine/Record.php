@@ -1593,6 +1593,7 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
                 }
             } else {
                 $localFieldName = $this->_table->getFieldName($rel->getLocal());
+                $foreignFieldName = '';
 
                 if ($value !== self::$_null) {
                     $relatedTable = $rel->getTable();
@@ -1815,6 +1816,13 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
     {
         $a = array();
 
+        /**
+         * This was previously unset (unless the if condition below is true),
+         * setting to empty array, which won't change behavior.
+         * @todo It seems like this is meant to be set to what's in $array, but not sure
+         */
+        $modifiedFields = array();
+
         if (empty($array)) {
             $modifiedFields = $this->_modified;
         }
@@ -1948,7 +1956,7 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
      *
      * @see fromArray()
      * @link http://www.doctrine-project.org/documentation/manual/1_1/en/working-with-models
-     * @param string $array  array of data to merge, see link for documentation
+     * @param array|Doctrine_Record $array  array of data to merge, see link for documentation
      * @param bool   $deep   whether or not to merge relations
      * @return void
      */
@@ -1958,6 +1966,8 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
             $array = $data->toArray($deep);
         } else if (is_array($data)) {
             $array = $data;
+        } else {
+            $array = array();
         }
 
         $this->fromArray($array, $deep);

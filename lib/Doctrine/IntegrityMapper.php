@@ -93,6 +93,9 @@ class Doctrine_IntegrityMapper
 
         $aliases = array();
         $indexes = array();
+        $fields = array();
+        $cond = array();
+        $params = '';
 
         $root = $record->getTable()->getComponentName();
         $rootAlias = strtolower(substr($root, 0, 1));

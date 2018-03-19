@@ -154,6 +154,11 @@ class Doctrine_Connection_Mssql extends Doctrine_Connection_Common
 
         $count = intval($limit);
         $offset = intval($offset);
+        $orders = array();
+        $tables = array();
+        $columns = array();
+        $aliases = array();
+        $sorts = array();
 
         if ($offset < 0) {
             throw new Doctrine_Connection_Exception("LIMIT argument offset=$offset is not valid");
