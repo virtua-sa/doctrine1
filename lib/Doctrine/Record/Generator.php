@@ -82,7 +82,7 @@ abstract class Doctrine_Record_Generator extends Doctrine_Record_Abstract
     /**
      * Returns the value of an option
      *
-     * @param $option       the name of the option to retrieve
+     * @param string $name       the name of the option to retrieve
      * @return mixed        the value of the option
      */
     public function getOption($name)
@@ -97,8 +97,8 @@ abstract class Doctrine_Record_Generator extends Doctrine_Record_Abstract
     /**
      * Sets given value to an option
      *
-     * @param $option       the name of the option to be changed
-     * @param $value        the value of the option
+     * @param string $name       the name of the option to be changed
+     * @param mixed  $value        the value of the option
      * @return $this  this object
      */
     public function setOption($name, $value)

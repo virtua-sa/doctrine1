@@ -130,13 +130,11 @@ class Doctrine_Expression_Pgsql extends Doctrine_Expression_Driver
     /**
      * PostgreSQLs CONCAT() function
      *
-     * @param  an array of values
+     * @param  mixed ...$args values to concat
      * @return string
      */
-    public function concat()
+    public function concat(...$args)
     {
-        $args = func_get_args();
-
         return join(' || ' , $args);
     }
 

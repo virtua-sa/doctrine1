@@ -51,7 +51,7 @@ class Doctrine_Export extends Doctrine_Connection_Module
      * drop an existing database
      * (this method is implemented by the drivers)
      *
-     * @param string $name name of the database that should be dropped
+     * @param string $database name of the database that should be dropped
      * @return void
      */
     public function dropDatabase($database)
@@ -65,7 +65,7 @@ class Doctrine_Export extends Doctrine_Connection_Module
      * drop an existing database
      * (this method is implemented by the drivers)
      *
-     * @param string $name name of the database that should be dropped
+     * @param string $database name of the database that should be dropped
      * @return string|array
      */
     public function dropDatabaseSql($database)
@@ -128,7 +128,7 @@ class Doctrine_Export extends Doctrine_Connection_Module
      *
      * @param string    $table        name of table that should be used in method
      * @param string    $name         name of the constraint to be dropped
-     * @param string    $primary      hint if the constraint is primary
+     * @param bool    $primary      hint if the constraint is primary
      * @return int
      */
     public function dropConstraint($table, $name, $primary = false)
@@ -182,7 +182,7 @@ class Doctrine_Export extends Doctrine_Connection_Module
      * create a new database
      * (this method is implemented by the drivers)
      *
-     * @param string $name name of the database that should be created
+     * @param string $database name of the database that should be created
      * @return void
      */
     public function createDatabase($database)
@@ -194,7 +194,7 @@ class Doctrine_Export extends Doctrine_Connection_Module
      * create a new database
      * (this method is implemented by the drivers)
      *
-     * @param string $name name of the database that should be created
+     * @param string $database name of the database that should be created
      * @return string
      */
     public function createDatabaseSql($database)
@@ -325,7 +325,7 @@ class Doctrine_Export extends Doctrine_Connection_Module
      *                              'charset' => 'utf8',
      *                              'collate' => 'utf8_unicode_ci',
      *                          );
-     * @return void
+     * @return PDOStatement|Doctrine_Adapter_Statement
      */
     public function createSequence($seqName, $start = 1, array $options = array())
     {
@@ -792,7 +792,7 @@ class Doctrine_Export extends Doctrine_Connection_Module
      * Obtain DBMS specific SQL code portion needed to set a NOT NULL
      * declaration to be used in statements like CREATE TABLE.
      *
-     * @param array $field      field definition array
+     * @param array $definition      field definition array
      * @return string           DBMS specific SQL code portion needed to set a default value
      */
     public function getNotNullFieldDeclaration(array $definition)
@@ -979,7 +979,6 @@ class Doctrine_Export extends Doctrine_Connection_Module
      *
      * @throws Doctrine_Exception_Exception     if unknown referential action given
      * @param string $action    foreign key referential action
-     * @param string            foreign key referential action in uppercase
      */
     public function getForeignKeyReferentialAction($action)
     {
@@ -1234,7 +1233,7 @@ class Doctrine_Export extends Doctrine_Connection_Module
      * @throws Doctrine_Connection_Exception    if some error other than Doctrine_Core::ERR_ALREADY_EXISTS
      *                                          occurred during the create table operation
      * @param array $classes
-     * @return void
+     * @return array
      */
     public function exportClassesSql(array $classes)
     {
@@ -1353,7 +1352,7 @@ class Doctrine_Export extends Doctrine_Connection_Module
      * @throws Doctrine_Connection_Exception    if some error other than Doctrine_Core::ERR_ALREADY_EXISTS
      *                                          occurred during the create table operation
      * @param string $directory     optional directory parameter
-     * @return void
+     * @return array
      */
     public function exportSql($directory = null)
     {

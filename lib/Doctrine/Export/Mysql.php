@@ -34,6 +34,12 @@
 class Doctrine_Export_Mysql extends Doctrine_Export
 {
     /**
+     * @var Doctrine_Connection_Mysql $conn       Doctrine_Connection object, every connection
+     *                                            module holds an instance of Doctrine_Connection
+     */
+    protected $conn;
+
+    /**
      * drop existing constraint
      *
      * @param string    $table        name of table that should be used in method
@@ -655,7 +661,7 @@ class Doctrine_Export_Mysql extends Doctrine_Export
      * Obtain DBMS specific SQL code portion needed to set an index
      * declaration to be used in statements like CREATE TABLE.
      *
-     * @param string $charset       name of the index
+     * @param string $name       name of the index
      * @param array $definition     index definition
      * @return string  DBMS specific SQL code portion needed to set an index
      */

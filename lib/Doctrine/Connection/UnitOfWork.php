@@ -285,7 +285,7 @@ class Doctrine_Connection_UnitOfWork extends Doctrine_Connection_Module
      * Builds the SQL condition to target multiple records who have a single-column
      * primary key.
      *
-     * @param Doctrine_Table $table  The table from which the records are going to be deleted.
+     * @param array $columnNames
      * @param integer $numRecords  The number of records that are going to be deleted.
      * @return string  The SQL condition "pk = ? OR pk = ? OR pk = ? ..."
      */
@@ -298,7 +298,7 @@ class Doctrine_Connection_UnitOfWork extends Doctrine_Connection_Module
     /**
      * Builds the SQL condition to target multiple records who have a composite primary key.
      *
-     * @param Doctrine_Table $table  The table from which the records are going to be deleted.
+     * @param array $columnNames
      * @param integer $numRecords  The number of records that are going to be deleted.
      * @return string  The SQL condition "(pk1 = ? AND pk2 = ?) OR (pk1 = ? AND pk2 = ?) ..."
      */
@@ -327,7 +327,7 @@ class Doctrine_Connection_UnitOfWork extends Doctrine_Connection_Module
      * Exception: many-valued relations are always (re-)fetched from the database to
      * make sure we have all of them.
      *
-     * @param Doctrine_Record  The record for which the delete operation will be cascaded.
+     * @param Doctrine_Record $record The record for which the delete operation will be cascaded.
      * @throws PDOException    If something went wrong at database level
      * @return void
      */
@@ -656,7 +656,7 @@ class Doctrine_Connection_UnitOfWork extends Doctrine_Connection_Module
      * 'correct' order. Basically this means that the records of those
      * components can be saved safely in the order specified by the returned array.
      *
-     * @param array $tables     an array of Doctrine_Table objects or component names
+     * @param array|Doctrine_Table[] $tables     an array of Doctrine_Table objects or component names
      * @return array            an array of component names in flushing order
      */
     public function buildFlushTree(array $tables)
@@ -666,7 +666,7 @@ class Doctrine_Connection_UnitOfWork extends Doctrine_Connection_Module
         $classesToOrder = array();
         foreach ($tables as $table) {
             if ( ! ($table instanceof Doctrine_Table)) {
-                $table = $this->conn->getTable($table, false);
+                $table = $this->conn->getTable($table);
             }
             $classesToOrder[] = $table->getComponentName();
         }
@@ -679,7 +679,7 @@ class Doctrine_Connection_UnitOfWork extends Doctrine_Connection_Module
         // build the correct order
         $flushList = array();
         foreach ($classesToOrder as $class) {
-            $table = $this->conn->getTable($class, false);
+            $table = $this->conn->getTable($class);
             $currentClass = $table->getComponentName();
 
             $index = array_search($currentClass, $flushList);

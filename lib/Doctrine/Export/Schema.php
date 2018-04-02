@@ -135,11 +135,12 @@ class Doctrine_Export_Schema
     /**
      * exportSchema
      *
-     * @param  string $schema
-     * @param  string $directory
-     * @param string $string of data in the specified format
+     * @param string $schema
+     * @param string $format
+     * @param string $directory
+     * @param array $models
      * @param integer $modelLoading The model loading strategy to use to load the models from the passed directory
-     * @return void
+     * @return int|false|string
      */
     public function exportSchema($schema, $format = 'yml', $directory = null, $models = array(), $modelLoading = null)
     {

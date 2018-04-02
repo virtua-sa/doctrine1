@@ -51,8 +51,8 @@ abstract class Doctrine_Access extends Doctrine_Locator_Injectable implements Ar
      * Set key and value to data
      *
      * @see     set, offsetSet
-     * @param   $name
-     * @param   $value
+     * @param   string $name
+     * @param   mixed $value
      * @return  void
      */
     public function __set($name, $value)
@@ -186,8 +186,8 @@ abstract class Doctrine_Access extends Doctrine_Locator_Injectable implements Ar
     }
 
     /**
-     * Check if the specified offset exists 
-     * 
+     * Check if the specified offset exists
+     *
      * @param mixed $offset The offset to check
      * @return boolean True if exists otherwise false
      */
@@ -197,9 +197,9 @@ abstract class Doctrine_Access extends Doctrine_Locator_Injectable implements Ar
     }
 
     /**
-     * Add the value  
-     * 
-     * @param mixed $value The value to add 
+     * Add the value
+     *
+     * @param mixed $value The value to add
      * @return void
      */
     public function add($value)

@@ -84,9 +84,6 @@ class Doctrine_Query_Check
     /**
      * parseClause
      *
-     * @param string $alias     component alias
-     * @param string $field     the field name
-     * @param mixed $value      the value of the field
      * @return string
      */
     public function parseClause($dql)

@@ -57,7 +57,7 @@ class Doctrine_Migration_Builder extends Doctrine_Builder
     /**
      * Class template used for writing classes
      *
-     * @var $tpl
+     * @var string $tpl
      */
     private static $tpl;
 
@@ -86,7 +86,7 @@ class Doctrine_Migration_Builder extends Doctrine_Builder
     /**
      * Set the path to write the generated migration classes
      *
-     * @param string path   the path where migration classes are stored and being generated
+     * @param string $path   the path where migration classes are stored and being generated
      * @return void
      */
     public function setMigrationsPath($path)

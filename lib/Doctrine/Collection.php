@@ -330,7 +330,7 @@ class Doctrine_Collection extends Doctrine_Access implements Countable, Iterator
     /**
      * Search a Doctrine_Record instance
      *
-     * @param string $Doctrine_Record
+     * @param Doctrine_Record $record
      * @return void
      */
     public function search(Doctrine_Record $record)

@@ -38,7 +38,7 @@ abstract class Doctrine_Parser
      * Override in the parser driver
      *
      * @param string $array
-     * @return void
+     * @return mixed
      * @author Jonathan H. Wage
      */
     abstract public function loadData($array);
@@ -51,7 +51,7 @@ abstract class Doctrine_Parser
      * @param string $array
      * @param string $path
      * @param string $charset The charset of the data being dumped
-     * @return void
+     * @return int|false|string
      * @author Jonathan H. Wage
      */
     abstract public function dumpData($array, $path = null, $charset = null);

@@ -134,7 +134,7 @@ class Doctrine_Adapter_Statement_Oracle implements Doctrine_Adapter_Statement_In
      * of stored procedures that return data as output parameters, and some also as input/output
      * parameters that both send in data and are updated to receive it.
      *
-     * @param mixed $param          Parameter identifier. For a prepared statement using named placeholders,
+     * @param mixed $column         Parameter identifier. For a prepared statement using named placeholders,
      *                              this will be a parameter name of the form :name. For a prepared statement
      *                              using question mark placeholders, this will be the 1-indexed position of the parameter
      *
@@ -347,7 +347,7 @@ class Doctrine_Adapter_Statement_Oracle implements Doctrine_Adapter_Statement_In
      *                                      This value must be one of the Doctrine_Core::FETCH_* constants,
      *                                      defaulting to Doctrine_Core::FETCH_BOTH
      *
-     * @param integer $columnIndex          Returns the indicated 0-indexed column when the value of $fetchStyle is
+     * @param integer $colnum               Returns the indicated 0-indexed column when the value of $fetchStyle is
      *                                      Doctrine_Core::FETCH_COLUMN. Defaults to 0.
      *
      * @return array
@@ -575,7 +575,7 @@ class Doctrine_Adapter_Statement_Oracle implements Doctrine_Adapter_Statement_In
 
     /**
      * Parse actual query from queryString and returns OCI statement handler
-     * @param  string       Query string to parse, if NULL, $this->queryString is used
+     * @param  string $query       Query string to parse, if NULL, $this->queryString is used
      *
      * @return resource     OCI statement handler
      */

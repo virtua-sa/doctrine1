@@ -96,7 +96,7 @@ class Doctrine_Relation_Parser
      * unsetPendingRelations
      * Removes a relation. Warning: this only affects pending relations
      *
-     * @param string            relation to remove
+     * @param string $name           relation to remove
      */
     public function unsetPendingRelations($name)
     {
@@ -122,7 +122,7 @@ class Doctrine_Relation_Parser
      * binds a relation
      *
      * @param string $name
-     * @param string $field
+     * @param array $options
      * @return void
      */
     public function bind($name, $options = array())

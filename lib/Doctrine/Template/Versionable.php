@@ -35,6 +35,11 @@
 class Doctrine_Template_Versionable extends Doctrine_Template
 {
     /**
+     * @var Doctrine_AuditLog $_plugin
+     */
+    protected $_plugin;
+
+    /**
      * Array of AuditLog Options
      *
      * @var array

@@ -851,7 +851,7 @@ class Doctrine_Manager extends Doctrine_Configurable implements Countable, Itera
     /**
      * Get all registered Doctrine extensions
      *
-     * @return $extensions
+     * @return array
      */
     public function getExtensions()
     {

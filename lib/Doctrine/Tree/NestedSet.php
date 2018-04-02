@@ -39,7 +39,7 @@ class Doctrine_Tree_NestedSet extends Doctrine_Tree implements Doctrine_Tree_Int
     /**
      * constructor, creates tree with reference to table and sets default root options
      *
-     * @param object $table                     instance of Doctrine_Table
+     * @param Doctrine_Table $table                     instance of Doctrine_Table
      * @param array $options                    options
      */
     public function __construct(Doctrine_Table $table, $options)
@@ -82,7 +82,7 @@ class Doctrine_Tree_NestedSet extends Doctrine_Tree implements Doctrine_Tree_Int
      * the records id will be assigned to the root id. You must use numeric columns for the id
      * and root id columns.
      *
-     * @param object $record        instance of Doctrine_Record
+     * @param Doctrine_Record $record        instance of Doctrine_Record
      */
     public function createRoot(Doctrine_Record $record = null)
     {
@@ -152,7 +152,7 @@ class Doctrine_Tree_NestedSet extends Doctrine_Tree implements Doctrine_Tree_Int
      * Fetches a tree.
      *
      * @param array $options  Options
-     * @param integer $fetchmode  One of the Doctrine_Core::HYDRATE_* constants.
+     * @param integer $hydrationMode  One of the Doctrine_Core::HYDRATE_* constants.
      * @return mixed          The tree or FALSE if the tree could not be found.
      */
     public function fetchTree($options = array(), $hydrationMode = null)
@@ -193,7 +193,7 @@ class Doctrine_Tree_NestedSet extends Doctrine_Tree implements Doctrine_Tree_Int
      *
      * @param mixed $pk              primary key as used by table::find() to locate node to traverse tree from
      * @param array $options         Options.
-     * @param integer $fetchmode  One of the Doctrine_Core::HYDRATE_* constants.
+     * @param integer $hydrationMode  One of the Doctrine_Core::HYDRATE_* constants.
      * @return mixed                 The branch or FALSE if the branch could not be found.
      * @todo Only fetch the lft and rgt values of the initial record. more is not needed.
      */
@@ -237,8 +237,8 @@ class Doctrine_Tree_NestedSet extends Doctrine_Tree implements Doctrine_Tree_Int
     /**
      * returns parsed query with root id where clause added if applicable
      *
-     * @param object    $query    Doctrine_Query
-     * @param integer   $root_id  id of destination root
+     * @param Doctrine_Query    $query
+     * @param integer   $rootId  id of destination root
      * @return Doctrine_Query
      */
     public function returnQueryWithRootId($query, $rootId = 1)
@@ -258,7 +258,6 @@ class Doctrine_Tree_NestedSet extends Doctrine_Tree implements Doctrine_Tree_Int
     /**
      * Enter description here...
      *
-     * @param array $options
      * @return Doctrine_Query
      */
     public function getBaseQuery()

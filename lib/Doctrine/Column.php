@@ -100,7 +100,6 @@ class Doctrine_Column extends Doctrine_Access implements IteratorAggregate, Coun
     }
 
     /**
-     * @param string $field
      * @return array
      */
     public function getEnumValues()

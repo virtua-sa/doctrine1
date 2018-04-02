@@ -36,7 +36,6 @@ class Doctrine_Export_Oracle extends Doctrine_Export
     /**
      * create a new database
      *
-     * @param object $db database object that is extended by this class
      * @param string $name name of the database that should be created
      * @return boolean      success of operation
      */
@@ -46,8 +45,8 @@ class Doctrine_Export_Oracle extends Doctrine_Export
             $username   = $name;
             $password   = $this->conn->dsn['password'] ? $this->conn->dsn['password'] : $name;
 
-            $tablespace = $this->conn->options['default_tablespace']
-                        ? ' DEFAULT TABLESPACE '.$this->conn->options['default_tablespace'] : '';
+            $tablespace = $this->conn->getOption('default_tablespace')
+                        ? ' DEFAULT TABLESPACE '.$this->conn->getOption('default_tablespace') : '';
 
             $query  = 'CREATE USER ' . $username . ' IDENTIFIED BY ' . $password . $tablespace;
             $result = $this->conn->exec($query);
@@ -65,7 +64,6 @@ class Doctrine_Export_Oracle extends Doctrine_Export
     /**
      * drop an existing database
      *
-     * @param object $this->conn database object that is extended by this class
      * @param string $name name of the database that should be dropped
      * @return boolean      success of operation
      * @access public
@@ -557,7 +555,6 @@ END;';
     /**
      * drop existing sequence
      *
-     * @param object $this->conn database object that is extended by this class
      * @param string $seqName name of the sequence to be dropped
      * @return string
      */

@@ -191,7 +191,7 @@ class Doctrine_Data
      * @param string $format
      * @param string $models
      * @param string $_exportIndividualFiles
-     * @return void
+     * @return int|false|string
      */
     public function exportData($directory, $format = 'yml', $models = array(), $_exportIndividualFiles = false)
     {
@@ -219,7 +219,7 @@ class Doctrine_Data
         $import->setFormat($format);
         $import->setModels($models);
 
-        return $import->doImport($append);
+        $import->doImport($append);
     }
 
     /**
@@ -227,7 +227,7 @@ class Doctrine_Data
      *
      * Check if a fieldName on a Doctrine_Record is a relation, if it is we return that relationData
      *
-     * @param string $Doctrine_Record
+     * @param Doctrine_Record $record
      * @param string $fieldName
      * @return false|array
      */

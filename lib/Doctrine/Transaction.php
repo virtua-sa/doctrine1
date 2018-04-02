@@ -406,7 +406,7 @@ class Doctrine_Transaction extends Doctrine_Connection_Module
      */
     protected function _doRollback()
     {
-        $this->conn->getDbh()->rollback();
+        $this->conn->getDbh()->rollBack();
     }
 
     /**
@@ -467,7 +467,7 @@ class Doctrine_Transaction extends Doctrine_Connection_Module
      * $tx->setIsolation('READ UNCOMMITTED');
      * </code>
      *
-     * @param   string  standard isolation level
+     * @param   string  $isolation standard isolation level
      *                  READ UNCOMMITTED (allows dirty reads)
      *                  READ COMMITTED (prevents dirty reads)
      *                  REPEATABLE READ (prevents nonrepeatable reads)

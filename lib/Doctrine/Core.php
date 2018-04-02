@@ -712,7 +712,7 @@ class Doctrine_Core
      * Will filter through an array of classes and return the Doctrine_Records out of them.
      * If you do not specify $classes it will return all of the currently loaded Doctrine_Records
      *
-     * @param classes  Array of classes to filter through, otherwise uses get_declared_classes()
+     * @param array $classes  Array of classes to filter through, otherwise uses get_declared_classes()
      * @return array   $loadedModels
      */
     public static function getLoadedModels($classes = null)
@@ -761,7 +761,7 @@ class Doctrine_Core
      * Filter through an array of classes and return all the classes that are valid models.
      * This will inflect the class, causing it to be loaded in to memory.
      *
-     * @param classes  Array of classes to filter through, otherwise uses get_declared_classes()
+     * @param array $classes  Array of classes to filter through
      * @return array   $loadedModels
      */
     public static function filterInvalidModels($classes)
@@ -798,7 +798,7 @@ class Doctrine_Core
             // Skip the following classes
             // - abstract classes
             // - not a subclass of Doctrine_Record
-            if ( ! $class->isAbstract() && $class->isSubClassOf('Doctrine_Record')) {
+            if ( ! $class->isAbstract() && $class->isSubclassOf('Doctrine_Record')) {
 
                 return true;
             }
@@ -850,7 +850,7 @@ class Doctrine_Core
      * @param string $yamlPath Path to write oyur yaml schema file to
      * @param array $connections Array of connection names to generate yaml for
      * @param array  $options Array of options
-     * @return void
+     * @return int|false|string
      */
     public static function generateYamlFromDb($yamlPath, array $connections = array(), array $options = array())
     {
@@ -885,7 +885,7 @@ class Doctrine_Core
         $import = new Doctrine_Import_Schema();
         $import->setOptions($options);
 
-        return $import->importSchema($yamlPath, 'yml', $directory);
+        $import->importSchema($yamlPath, 'yml', $directory);
     }
 
     /**
@@ -896,7 +896,7 @@ class Doctrine_Core
      */
     public static function createTablesFromModels($directory = null)
     {
-        return Doctrine_Manager::connection()->export->exportSchema($directory);
+        Doctrine_Manager::connection()->export->exportSchema($directory);
     }
 
     /**
@@ -907,7 +907,7 @@ class Doctrine_Core
      */
     public static function createTablesFromArray($array)
     {
-        return Doctrine_Manager::connection()->export->exportClasses($array);
+        Doctrine_Manager::connection()->export->exportClasses($array);
     }
 
     /**
@@ -963,7 +963,7 @@ class Doctrine_Core
      */
     public static function createDatabases($specifiedConnections = array())
     {
-        return Doctrine_Manager::getInstance()->createDatabases($specifiedConnections);
+        Doctrine_Manager::getInstance()->createDatabases($specifiedConnections);
     }
 
     /**
@@ -974,7 +974,7 @@ class Doctrine_Core
      */
     public static function dropDatabases($specifiedConnections = array())
     {
-        return Doctrine_Manager::getInstance()->dropDatabases($specifiedConnections);
+        Doctrine_Manager::getInstance()->dropDatabases($specifiedConnections);
     }
 
     /**
@@ -982,7 +982,7 @@ class Doctrine_Core
      *
      * @param string $yamlPath Path to write the yaml data fixtures to
      * @param string $individualFiles Whether or not to dump data to individual fixtures files
-     * @return void
+     * @return int|false|string
      */
     public static function dumpData($yamlPath, $individualFiles = false)
     {
@@ -1003,7 +1003,7 @@ class Doctrine_Core
     {
         $data = new Doctrine_Data();
 
-        return $data->importData($yamlPath, 'yml', array(), $append);
+        $data->importData($yamlPath, 'yml', array(), $append);
     }
 
     /**
