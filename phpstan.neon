@@ -1,15 +1,9 @@
 parameters:
+    bootstrap: %rootDir%/../../../phpstan-bootstrap.php
     ignoreErrors:
         #########
         # Level 0
         #########
-        # Missing functions due to extension not installed
-        - '#Function oci_.+ not found\.#'
-        - '#Function apc_.+ not found\.#'
-        - '#Function xcache_.+ not found\.#'
-        # Memcache extension not installed
-        - '#Instantiated class Memcache not found\.#'
-        - '#Property .+ unknown class Memcache as its type\.#'
         # These two methods don't exist (anywhere in Doctrine), this sequence adapter is probably broken
         - '#Call to an undefined method Doctrine_Sequence_Db2::_connect\(\)\.#'
         - '#Call to an undefined method Doctrine_Sequence_Db2::lastSequenceId\(\)\.#'
@@ -71,11 +65,6 @@ parameters:
         #########
         # Level 1
         #########
-        # Missing extensions
-        - '#Constant MEMCACHE_COMPRESSED not found\.#'
-        - '#Constant XC_TYPE_VAR not found\.#'
-        - '#Constant OCI_.+ not found\.#'
-        - '#Constant SQLT_CHR not found\.#'
         # This isset check could probably be removed (Doctrine_I18n:124) because the method that is called to set `$others` already does an
         # isset check on the value it returns and throws an exception if it's not set
         - '#Variable \$others in isset\(\) always exists and is not nullable\.#'
@@ -137,8 +126,6 @@ parameters:
         # (nor its parents).  This code isn't currently touched by tests, assuming it's broken.
         # (https://codecov.io/gh/diablomedia/doctrine1/src/master/lib/Doctrine/IntegrityMapper.php#L56)
         - '#Call to an undefined method Doctrine_Manager::getDeleteActions\(\)\.#'
-        # Missing extensions
-        - '#Call to method .+\(\) on an unknown class Memcache\.#'
         # There is one Doctrine_Connection subclass that has 6 parameters (Doctrine_Connection_Mssql), could perhaps branch this code
         # and detect for that particular class and call it with 6 parameters in that case, otherwise with 4
         # Doctrine_Query:1375
