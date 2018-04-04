@@ -35,7 +35,7 @@ class Doctrine_Template_Listener_Sluggable extends Doctrine_Record_Listener
     /**
      * Array of sluggable options
      *
-     * @var string
+     * @var array
      */
     protected $_options = array();
 

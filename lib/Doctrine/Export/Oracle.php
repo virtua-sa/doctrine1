@@ -100,8 +100,7 @@ SQL;
      * @param string $name  name of the PK field
      * @param string $table name of the table
      * @param string $start start value for the sequence
-     * @return string        Sql code
-     * @access private
+     * @return array        Sql code
      */
     public function _makeAutoincrement($name, $table, $start = 1)
     {
@@ -468,7 +467,7 @@ END;';
      * @param boolean $check     indicates whether the function should just check if the DBMS driver
      *                             can perform the requested table alterations if the value is true or
      *                             actually perform them otherwise.
-     * @return void
+     * @return false|void
      */
     public function alterTable($name, array $changes, $check = false)
     {
@@ -570,7 +569,7 @@ END;';
      *
      * @param string $name      name of the index
      * @param array $definition index definition
-     * @return string           Oracle's SQL code portion needed to set an index
+     * @return string|null           Oracle's SQL code portion needed to set an index
      */
     public function getIndexDeclaration($name, array $definition)
     {

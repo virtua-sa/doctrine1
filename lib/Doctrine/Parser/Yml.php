@@ -40,8 +40,7 @@ class Doctrine_Parser_Yml extends Doctrine_Parser
      * @throws Doctrine_Parser_Exception dumping error
      * @param  string $array Array of data to dump to yaml
      * @param  string $path  Path to dump the yaml to
-     * @return string $yaml
-     * @return void
+     * @return int|false|string
      */
     public function dumpData($array, $path = null, $charset = null)
     {

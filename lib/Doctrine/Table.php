@@ -617,7 +617,7 @@ class Doctrine_Table extends Doctrine_Configurable implements Countable
      * getMethodOwner
      *
      * @param string $method
-     * @return void
+     * @return false|string
      */
     public function getMethodOwner($method)
     {
@@ -1186,7 +1186,7 @@ class Doctrine_Table extends Doctrine_Configurable implements Countable
      * Retrieves a column definition from this table schema.
      *
      * @param string $columnName
-     * @return array              column definition; @see $_columns
+     * @return array|false              column definition; @see $_columns
      */
     public function getColumnDefinition($columnName)
     {
@@ -1923,7 +1923,7 @@ class Doctrine_Table extends Doctrine_Configurable implements Countable
     /**
      * @param string|int  $id                       database row id
      * @throws Doctrine_Find_Exception
-     * @return Doctrine_Record
+     * @return Doctrine_Record|false
      */
     final public function getProxy($id = null)
     {
@@ -2252,7 +2252,7 @@ class Doctrine_Table extends Doctrine_Configurable implements Countable
      * which can be a column name or a field name (alias).
      *
      * @param string $fieldName
-     * @return array        false on failure
+     * @return array|false        false on failure
      */
     public function getDefinitionOf($fieldName)
     {
@@ -2528,7 +2528,7 @@ class Doctrine_Table extends Doctrine_Configurable implements Countable
      * Checks if a generator name exists.
      *
      * @param string $generator
-     * @return void
+     * @return bool
      */
     public function hasGenerator($generator)
     {
@@ -2588,7 +2588,7 @@ class Doctrine_Table extends Doctrine_Configurable implements Countable
      * @see bindQueryPart()
      *
      * @param array $queryParts         an array of pre-bound query parts
-     * @return Doctrine_Table           this object
+     * @return $this           this object
      */
     public function bindQueryParts(array $queryParts)
     {
@@ -2605,7 +2605,7 @@ class Doctrine_Table extends Doctrine_Configurable implements Countable
      *
      * @param string $queryPart
      * @param mixed $value
-     * @return Doctrine_Record          this object
+     * @return $this          this object
      */
     public function bindQueryPart($queryPart, $value)
     {
@@ -2677,7 +2677,7 @@ class Doctrine_Table extends Doctrine_Configurable implements Countable
      * @see bindQueryPart()
      *
      * @param string $queryPart     field interested
-     * @return string               value of the bind
+     * @return string|null               value of the bind
      */
     public function getBoundQueryPart($queryPart)
     {
@@ -2801,7 +2801,7 @@ class Doctrine_Table extends Doctrine_Configurable implements Countable
      * to get the column or field name.
      *
      * @param string $name
-     * @return string $fieldName
+     * @return string|false $fieldName
      */
     protected function _resolveFindByFieldName($name)
     {

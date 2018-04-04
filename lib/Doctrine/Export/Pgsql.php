@@ -45,7 +45,7 @@ class Doctrine_Export_Pgsql extends Doctrine_Export
      * createDatabaseSql
      *
      * @param string $name
-     * @return void
+     * @return string
      */
     public function createDatabaseSql($name)
     {
@@ -112,7 +112,7 @@ class Doctrine_Export_Pgsql extends Doctrine_Export
      *                              can perform the requested table alterations if the value is true or
      *                              actually perform them otherwise.
      * @see Doctrine_Export::alterTable()
-     * @return array
+     * @return array|true
      */
     public function alterTableSql($name, array $changes, $check = false)
     {

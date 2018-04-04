@@ -140,7 +140,7 @@ class Doctrine_Formatter extends Doctrine_Connection_Module
      * @param array $arr           identifiers array to be quoted
      * @param bool $checkOption     check the 'quote_identifier' option
      *
-     * @return string               quoted identifier string
+     * @return array
      */
     public function quoteMultipleIdentifier($arr, $checkOption = true)
     {

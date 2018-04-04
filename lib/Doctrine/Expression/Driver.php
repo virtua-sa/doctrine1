@@ -240,7 +240,7 @@ class Doctrine_Expression_Driver extends Doctrine_Connection_Module
      *
      * @param string $substr    literal string to find
      * @param string $str       literal string
-     * @return integer
+     * @return string
      */
     public function locate($str, $substr)
     {
@@ -588,7 +588,7 @@ class Doctrine_Expression_Driver extends Doctrine_Connection_Module
      * sin
      *
      * @param string $value
-     * @return void
+     * @return string
      */
     public function sin($value)
     {
@@ -598,7 +598,7 @@ class Doctrine_Expression_Driver extends Doctrine_Connection_Module
     /**
      * pi
      *
-     * @return void
+     * @return string
      */
     public function pi()
     {
@@ -609,7 +609,7 @@ class Doctrine_Expression_Driver extends Doctrine_Connection_Module
      * cos
      *
      * @param string $value
-     * @return void
+     * @return string
      */
     public function cos($value)
     {

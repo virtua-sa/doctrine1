@@ -124,7 +124,7 @@ abstract class Doctrine_Cache_Driver implements Doctrine_Cache_Interface
      * Note: This method accepts wildcards with the * character
      *
      * @param string $id cache id
-     * @return boolean true if no problem
+     * @return int|bool
      */
     public function delete($id)
     {

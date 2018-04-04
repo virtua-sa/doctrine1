@@ -85,7 +85,7 @@ class Doctrine_IntegrityMapper
      * buildIntegrityRelationQuery
      *
      * @param Doctrine_Record $record
-     * @return array The result
+     * @return Doctrine_Collection The result
      */
     public function buildIntegrityRelationQuery(Doctrine_Record $record)
     {

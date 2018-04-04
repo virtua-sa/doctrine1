@@ -63,7 +63,7 @@ class Doctrine_Query_Check
      * getTable
      * returns the table object associated with this object
      *
-     * @return Doctrine_Connection
+     * @return Doctrine_Table
      */
     public function getTable()
     {

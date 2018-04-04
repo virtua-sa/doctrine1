@@ -354,7 +354,7 @@ class Doctrine_Data_Import extends Doctrine_Data
      * Load nested set data for models with nested set enabled
      *
      * @param string $model
-     * @param string $nestedSetData
+     * @param array $nestedSetData
      * @param Doctrine_Record $parent
      * @return void
      */

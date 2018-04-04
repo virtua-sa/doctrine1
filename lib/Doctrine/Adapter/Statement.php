@@ -46,7 +46,7 @@ abstract class Doctrine_Adapter_Statement
      * fetch
      *
      * @see Doctrine_Core::FETCH_* constants
-     * @return void
+     * @return mixed
      */
     public function fetch()
     { }

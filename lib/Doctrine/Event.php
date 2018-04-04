@@ -96,7 +96,7 @@ class Doctrine_Event
     protected $_query;
 
     /**
-     * @var string $_params             the parameters associated with the query (if any)
+     * @var array $_params             the parameters associated with the query (if any)
      */
     protected $_params;
 
@@ -140,7 +140,7 @@ class Doctrine_Event
     /**
      * getQuery
      *
-     * @return Doctrine_Query       returns the query associated with this event (if any)
+     * @return string|Doctrine_Query       returns the query associated with this event (if any)
      */
     public function getQuery()
     {
@@ -367,7 +367,7 @@ class Doctrine_Event
      * Get the elapsed time (in microseconds) that the event ran.  If the event has
      * not yet ended, return false.
      *
-     * @return integer
+     * @return integer|false
      */
     public function getElapsedSecs()
     {

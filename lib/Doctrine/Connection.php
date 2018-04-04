@@ -208,6 +208,11 @@ abstract class Doctrine_Connection extends Doctrine_Configurable implements Coun
         );
 
     /**
+     * @var Doctrine_Manager $parent   the parent of this component
+     */
+    protected $parent;
+
+    /**
      * the constructor
      *
      * @param Doctrine_Manager $manager                 the manager object
@@ -354,7 +359,7 @@ abstract class Doctrine_Connection extends Doctrine_Configurable implements Coun
      *
      * @param integer $attribute
      * @param mixed $value
-     * @return boolean
+     * @return $this
      */
     public function setAttribute($attribute, $value)
     {
@@ -459,7 +464,7 @@ abstract class Doctrine_Connection extends Doctrine_Configurable implements Coun
     /**
      * returns the database handler of which this connection uses
      *
-     * @return PDO              the database handler
+     * @return PDO|Doctrine_Adapter_Interface              the database handler
      */
     public function getDbh()
     {
@@ -649,7 +654,7 @@ abstract class Doctrine_Connection extends Doctrine_Configurable implements Coun
      * @param Doctrine_Table $table     The table to insert data into
      * @param array $fields             An associative array containing column-value pairs.
      *                                  Values can be strings or Doctrine_Expression instances.
-     * @return integer                  the number of affected rows. Boolean false if empty value array was given,
+     * @return integer|false            the number of affected rows. Boolean false if empty value array was given,
      */
     public function update(Doctrine_Table $table, array $fields, array $identifier)
     {
@@ -762,7 +767,7 @@ abstract class Doctrine_Connection extends Doctrine_Configurable implements Coun
      * @param array $arr           identifiers array to be quoted
      * @param bool $checkOption     check the 'quote_identifier' option
      *
-     * @return string               quoted identifier string
+     * @return array
      */
     public function quoteMultipleIdentifier($arr, $checkOption = true)
     {
@@ -990,7 +995,7 @@ abstract class Doctrine_Connection extends Doctrine_Configurable implements Coun
      * @param string $query
      * @param integer $limit
      * @param integer $offset
-     * @return Doctrine_Connection_Statement
+     * @return PDOStatement|Doctrine_Adapter_Statement
      */
     public function select($query, $limit = 0, $offset = 0)
     {

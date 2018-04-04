@@ -55,7 +55,7 @@ class Doctrine_Manager extends Doctrine_Configurable implements Countable, Itera
     protected $_currIndex     = 0;
 
     /**
-     * @var Doctrine_Query_Registry     the query registry
+     * @var Doctrine_Query_Registry|null     the query registry
      */
     protected $_queryRegistry;
 

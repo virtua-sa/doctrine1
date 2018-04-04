@@ -184,7 +184,7 @@ class Doctrine_Adapter_Mock implements Doctrine_Adapter_Interface, Countable
      * Execute a raw sql statement
      *
      * @param string $statement
-     * @return void
+     * @return int
      */
     public function exec($statement)
     {
@@ -221,7 +221,7 @@ class Doctrine_Adapter_Mock implements Doctrine_Adapter_Interface, Countable
     /**
      * Get the id of the last inserted record
      *
-     * @return integer $id
+     * @return integer|null $id
      */
     public function lastInsertId()
     {

@@ -62,7 +62,7 @@ class Doctrine_Export_Sqlite extends Doctrine_Export
      * Create sqlite database file
      *
      * @param string $databaseFile  Path of the database that should be dropped
-     * @return void
+     * @return PDO
      */
     public function createDatabase($databaseFile)
     {
@@ -184,7 +184,7 @@ class Doctrine_Export_Sqlite extends Doctrine_Export
      *                          );
      * @param array $options  An associative array of table options:
      *
-     * @return void
+     * @return array
      */
     public function createTableSql($name, array $fields, array $options = array())
     {
@@ -412,7 +412,7 @@ class Doctrine_Export_Sqlite extends Doctrine_Export
      *
      * @param string    $table         name of the table on which the foreign key is to be created
      * @param array     $definition    associative array that defines properties of the foreign key to be created.
-     * @return string
+     * @return false
      */
     public function createForeignKey($table, array $definition)
     {

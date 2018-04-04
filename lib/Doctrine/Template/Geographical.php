@@ -37,7 +37,7 @@ class Doctrine_Template_Geographical extends Doctrine_Template
     /**
      * Array of geographical options
      *
-     * @var string
+     * @var array
      */
     protected $_options = array('latitude' =>  array('name'     =>  'latitude',
                                                      'type'     =>  'double',

@@ -40,8 +40,7 @@ class Doctrine_Parser_Xml extends Doctrine_Parser
      * @param  string $array Array of data to convert to xml
      * @param  string $path  Path to write xml data to
      * @param string $charset The charset of the data being dumped
-     * @return string $xml
-     * @return void
+     * @return int|false|string
      */
     public function dumpData($array, $path = null, $charset = null)
     {
@@ -53,7 +52,7 @@ class Doctrine_Parser_Xml extends Doctrine_Parser
     /**
      * arrayToXml
      *
-     * @param  string $array        Array to convert to xml
+     * @param  array $array        Array to convert to xml
      * @param  string $rootNodeName Name of the root node
      * @param  string $xml          SimpleXmlElement
      * @return string $asXml        String of xml built from array

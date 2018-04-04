@@ -121,7 +121,7 @@ class Doctrine_Pager_Layout
      *
      * @param array $params               Optional parameters to Doctrine_Query::execute
      * @param int $hydrationMode        Hydration Mode of Doctrine_Query::execute returned ResultSet.
-     * @return Doctrine_Collection  The root collection
+     * @return Doctrine_Collection|array  The root collection
      */
     public function execute($params = array(), $hydrationMode = null)
     {
@@ -305,7 +305,6 @@ class Doctrine_Pager_Layout
      */
     public function cleanMaskReplacements()
     {
-        $this->_maskReplacements = null;
         $this->_maskReplacements = array();
     }
 
@@ -432,7 +431,7 @@ class Doctrine_Pager_Layout
      * Parse the mask replacements of a given page
      *
      * @param array $options    Optional parameters to be applied in template and url mask
-     * @return string
+     * @return array
      */
     protected function _parseReplacementsTemplate($options = array())
     {

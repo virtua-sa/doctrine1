@@ -38,7 +38,7 @@ class Doctrine_Query_Groupby extends Doctrine_Query_Part
      *
      * @param string $clause
      * @param bool $append
-     * @return void
+     * @return string
      */
     public function parse($clause, $append = false)
     {

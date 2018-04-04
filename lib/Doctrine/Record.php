@@ -94,7 +94,7 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
     protected $_node;
 
     /**
-     * @var integer $_id                    the primary keys of this object
+     * @var array $_id                    the primary keys of this object
      */
     protected $_id           = array();
 
@@ -148,7 +148,7 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
     /**
      * Doctrine_Collection of objects needing to be deleted on save
      *
-     * @var string
+     * @var array
      */
     protected $_pendingDeletes = array();
 
@@ -185,7 +185,7 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
      *
      * @var array
      */
-    protected $_invokedSaveHooks = false;
+    protected $_invokedSaveHooks = array();
 
     /**
      * @var integer $index                  this index is used for creating object identifiers
@@ -604,7 +604,7 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
      * Get the record error stack as a human readable string.
      * Useful for outputting errors to user via web browser
      *
-     * @return string $message
+     * @return string|false $message
      */
     public function getErrorStackAsString()
     {
@@ -966,7 +966,7 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
      *
      * @throws Doctrine_Record_Exception        When the refresh operation fails (when the database row
      *                                          this record represents does not exist anymore)
-     * @return boolean
+     * @return $this|boolean
      */
     public function refresh($deep = false)
     {
@@ -1730,7 +1730,7 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
      * success or FALSE on failure.
      *
      * @param Doctrine_Connection $conn                 optional connection parameter
-     * @return TRUE if the record was saved sucessfully without errors, FALSE otherwise.
+     * @return bool TRUE if the record was saved sucessfully without errors, FALSE otherwise.
      */
     public function trySave(Doctrine_Connection $conn = null) {
         try {
@@ -1899,7 +1899,7 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
      * @link http://www.doctrine-project.org/documentation/manual/1_1/en/working-with-models
      * @param boolean $deep         whether to include relations
      * @param boolean $prefixKey    not used
-     * @return array
+     * @return array|false
      */
     public function toArray($deep = true, $prefixKey = false)
     {
@@ -2082,7 +2082,7 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
      *
      * @param string $type  format type: array, xml, yml, json
      * @param string $deep  whether or not to export all relationships
-     * @return string       representation as $type format. Array is $type is array
+     * @return false|int|string|array       representation as $type format. Array is $type is array
      */
     public function exportTo($type, $deep = true)
     {
@@ -2282,7 +2282,7 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
     /**
      * returns the value of autoincremented primary key of this object (if any)
      *
-     * @return integer
+     * @return integer|null
      * @todo Better name?
      */
     final public function getIncremented()

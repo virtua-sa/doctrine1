@@ -38,7 +38,7 @@ class Doctrine_Sequence_Mysql extends Doctrine_Sequence
      * @param string $seqName   name of the sequence
      * @param bool   $onDemand  when true missing sequences are automatic created
      *
-     * @return integer          next id in the given sequence
+     * @return integer|bool          next id in the given sequence
      */
     public function nextId($seqName, $onDemand = true)
     {

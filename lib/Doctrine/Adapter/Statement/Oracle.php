@@ -193,7 +193,7 @@ class Doctrine_Adapter_Statement_Oracle implements Doctrine_Adapter_Statement_In
     /**
      * Returns the number of columns in the result set
      *
-     * @return integer              Returns the number of columns in the result set represented
+     * @return integer|false        Returns the number of columns in the result set represented
      *                              by the Doctrine_Adapter_Statement_Interface object. If there is no result set,
      *                              this method should return 0.
      */
@@ -218,7 +218,7 @@ class Doctrine_Adapter_Statement_Oracle implements Doctrine_Adapter_Statement_In
      * Fetch extended error information associated with the last operation on the statement handle
      *
      * @see Doctrine_Adapter_Interface::errorInfo()
-     * @return array        error info array
+     * @return string
      */
     public function errorInfo()
     {
@@ -314,7 +314,7 @@ class Doctrine_Adapter_Statement_Oracle implements Doctrine_Adapter_Statement_In
                 return oci_fetch_array($this->statement, OCI_NUM + OCI_RETURN_NULLS + OCI_RETURN_LOBS);
             break;
             case Doctrine_Core::FETCH_OBJ:
-                return oci_fetch_object($this->statement, OCI_NUM + OCI_RETURN_NULLS + OCI_RETURN_LOBS);
+                return oci_fetch_object($this->statement);
             break;
             default:
                 throw new Doctrine_Adapter_Exception("This type of fetch is not supported: ".$fetchStyle);
@@ -388,7 +388,7 @@ class Doctrine_Adapter_Statement_Oracle implements Doctrine_Adapter_Statement_In
      *                                      value is supplied, Doctrine_Adapter_Statement_Interface->fetchColumn()
      *                                      fetches the first column.
      *
-     * @return string                       returns a single column in the next row of a result set.
+     * @return string|false                       returns a single column in the next row of a result set.
      */
     public function fetchColumn($columnIndex = 0)
     {
@@ -507,7 +507,7 @@ class Doctrine_Adapter_Statement_Oracle implements Doctrine_Adapter_Statement_In
      * this behaviour is not guaranteed for all databases and should not be
      * relied on for portable applications.
      *
-     * @return integer                      Returns the number of rows.
+     * @return integer|false                 Returns the number of rows.
      */
     public function rowCount()
     {
@@ -592,12 +592,14 @@ class Doctrine_Adapter_Statement_Oracle implements Doctrine_Adapter_Statement_In
             $query
         );
 
-        $this->statement =  @oci_parse($this->connection, $query);
+        $statement = @oci_parse($this->connection, $query);
 
-        if ( $this->statement == false )
+        if ( $statement == false )
         {
             throw new Doctrine_Adapter_Exception($this->getOciError());
         }
+
+        $this->statement = $statement;
 
         return $this->statement;
     }

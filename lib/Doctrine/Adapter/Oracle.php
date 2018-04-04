@@ -177,7 +177,7 @@ class Doctrine_Adapter_Oracle implements Doctrine_Adapter_Interface
      * Execute a raw sql statement
      *
      * @param string $statement
-     * @return void
+     * @return int|false
      */
     public function exec($statement)
     {
@@ -212,7 +212,7 @@ class Doctrine_Adapter_Oracle implements Doctrine_Adapter_Interface
     /**
      * Commit a transaction
      *
-     * @return void
+     * @return bool
      */
     public function commit()
     {

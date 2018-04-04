@@ -76,7 +76,7 @@ class Doctrine_RawSql extends Doctrine_Query_Abstract
      * @param boolean $append           whether or not to append the query part to its stack
      *                                  if false is given, this method will overwrite
      *                                  the given query part stack with $queryPart
-     * @return Doctrine_Query           this object
+     * @return $this           this object
      */
  	public function parseDqlQueryPart($queryPartName, $queryPart, $append = false)
     {
