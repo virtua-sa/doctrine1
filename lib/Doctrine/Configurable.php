@@ -237,7 +237,7 @@ abstract class Doctrine_Configurable extends Doctrine_Locator_Injectable
     /**
      * getListener
      *
-     * @return Doctrine_EventListener_Interface|Doctrine_Overloadable
+     * @return Doctrine_EventListener_Interface|Doctrine_Overloadable|null
      */
     public function getRecordListener()
     {
@@ -289,7 +289,7 @@ abstract class Doctrine_Configurable extends Doctrine_Locator_Injectable
     /**
      * getListener
      *
-     * @return Doctrine_EventListener_Interface|Doctrine_Overloadable
+     * @return Doctrine_EventListener_Interface|Doctrine_Overloadable|null
      */
     public function getListener()
     {

@@ -38,7 +38,7 @@ class Doctrine_Export_Mssql extends Doctrine_Export
      * create a new database
      *
      * @param string $name name of the database that should be created
-     * @return Doctrine_Adapter_Statement|PDOStatement
+     * @return PDOStatement|Doctrine_Adapter_Statement_Interface
      */
     public function createDatabase($name)
     {
@@ -57,7 +57,7 @@ class Doctrine_Export_Mssql extends Doctrine_Export
      * drop an existing database
      *
      * @param string $name name of the database that should be dropped
-     * @return Doctrine_Adapter_Statement|PDOStatement
+     * @return PDOStatement|Doctrine_Adapter_Statement_Interface
      */
     public function dropDatabase($name)
     {

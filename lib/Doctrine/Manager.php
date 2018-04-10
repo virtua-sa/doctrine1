@@ -271,7 +271,7 @@ class Doctrine_Manager extends Doctrine_Configurable implements Countable, Itera
     /**
      * Opens a new connection and saves it to Doctrine_Manager->connections
      *
-     * @param PDO|Doctrine_Adapter_Interface $adapter   database driver
+     * @param PDO|Doctrine_Adapter_Interface|array|string $adapter   database driver, DSN or array of connection options
      * @param string $name                              name of the connection, if empty numeric key is used
      * @throws Doctrine_Manager_Exception               if trying to bind a connection with an existing name
      * @throws Doctrine_Manager_Exception               if trying to open connection for unknown driver

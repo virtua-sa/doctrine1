@@ -325,7 +325,7 @@ class Doctrine_Export extends Doctrine_Connection_Module
      *                              'charset' => 'utf8',
      *                              'collate' => 'utf8_unicode_ci',
      *                          );
-     * @return PDOStatement|Doctrine_Adapter_Statement
+     * @return Doctrine_Adapter_Statement_Interface|PDOStatement
      */
     public function createSequence($seqName, $start = 1, array $options = array())
     {
@@ -451,7 +451,7 @@ class Doctrine_Export extends Doctrine_Connection_Module
      *                                            'last_login' => array()
      *                                        )
      *                                    )
-     * @return Doctrine_Adapter_Statement|PDOStatement
+     * @return Doctrine_Adapter_Statement_Interface|PDOStatement
      */
     public function createIndex($table, $name, array $definition)
     {
@@ -515,7 +515,7 @@ class Doctrine_Export extends Doctrine_Connection_Module
      *
      * @param string    $table         name of the table on which the foreign key is to be created
      * @param array     $definition    associative array that defines properties of the foreign key to be created.
-     * @return Doctrine_Adapter_Statement|PDOStatement
+     * @return Doctrine_Adapter_Statement_Interface|PDOStatement
      */
     public function createForeignKey($table, array $definition)
     {

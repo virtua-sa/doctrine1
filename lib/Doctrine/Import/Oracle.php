@@ -33,7 +33,7 @@ class Doctrine_Import_Oracle extends Doctrine_Import
     /**
      * lists all databases
      *
-     * @return array
+     * @return mixed|false
      */
     public function listDatabases()
     {
@@ -43,6 +43,7 @@ class Doctrine_Import_Oracle extends Doctrine_Import
 
         $query   = 'SELECT username FROM sys.user_users';
 
+        /** @var Doctrine_Adapter_Statement_Oracle|PDOStatement $result2 */
         $result2 = $this->conn->standaloneQuery($query);
         $result  = $result2->fetchColumn();
 

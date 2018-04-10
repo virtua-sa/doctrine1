@@ -371,7 +371,7 @@ class sfYamlInline
    *
    * @param string $scalar
    *
-   * @return string|bool A YAML string
+   * @return string|bool|null A YAML string
    */
   static protected function evaluateScalar($scalar)
   {

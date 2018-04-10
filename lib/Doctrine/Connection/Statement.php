@@ -39,7 +39,7 @@ class Doctrine_Connection_Statement implements Doctrine_Adapter_Statement_Interf
     protected $_conn;
 
     /**
-     * @var PDOStatement|false|Doctrine_Adapter_Statement $_stmt                    PDOStatement object, boolean false or Doctrine_Adapter_Statement object
+     * @var PDOStatement|Doctrine_Adapter_Statement_Interface $_stmt   PDOStatement or object that implements Doctrine_Adapter_Statement_Interface
      */
     protected $_stmt;
 
@@ -48,7 +48,7 @@ class Doctrine_Connection_Statement implements Doctrine_Adapter_Statement_Interf
      *
      * @param Doctrine_Connection $conn     Doctrine_Connection object, every connection
      *                                      statement holds an instance of Doctrine_Connection
-     * @param PDOStatement|false|Doctrine_Adapter_Statement $stmt
+     * @param PDOStatement|Doctrine_Adapter_Statement_Interface $stmt
      */
     public function __construct(Doctrine_Connection $conn, $stmt)
     {
@@ -71,6 +71,9 @@ class Doctrine_Connection_Statement implements Doctrine_Adapter_Statement_Interf
         return $this->_conn;
     }
 
+    /**
+     * @return PDOStatement|Doctrine_Adapter_Statement_Interface
+     */
     public function getStatement()
     {
         return $this->_stmt;

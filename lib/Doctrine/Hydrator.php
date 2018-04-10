@@ -138,7 +138,7 @@ class Doctrine_Hydrator
      * Hydrate the query statement in to its final data structure by one of the
      * hydration drivers.
      *
-     * @param object $stmt
+     * @param Doctrine_Adapter_Statement_Interface|PDOStatement $stmt
      * @param array $tableAliases
      * @return mixed $result
      */

@@ -374,7 +374,7 @@ class Doctrine_Connection_Mssql extends Doctrine_Connection_Common
      * @param string $query     sql query
      * @param array $params     query parameters
      *
-     * @return PDOStatement|Doctrine_Adapter_Statement
+     * @return PDOStatement|Doctrine_Adapter_Statement_Interface
      */
     public function execute($query, array $params = array())
     {
@@ -390,7 +390,7 @@ class Doctrine_Connection_Mssql extends Doctrine_Connection_Common
      * @param string $query     sql query
      * @param array $params     query parameters
      *
-     * @return PDOStatement|Doctrine_Adapter_Statement
+     * @return int
      */
     public function exec($query, array $params = array())
     {
