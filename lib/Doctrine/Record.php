@@ -917,11 +917,11 @@ abstract class Doctrine_Record extends Doctrine_Record_Abstract implements Count
     /**
      * assigns the state of this record or returns it if called without parameters
      *
-     * @param integer|string $state                 if set, this method tries to set the record state to $state
+     * @param integer|string|null $state                 if set, this method tries to set the record state to $state
      * @see Doctrine_Record::STATE_* constants
      *
      * @throws Doctrine_Record_State_Exception      if trying to set an unknown state
-     * @return null|integer
+     * @return void|integer
      */
     public function state($state = null)
     {
