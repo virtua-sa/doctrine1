@@ -482,7 +482,6 @@ class Doctrine_Cli
             if ($exception instanceof Doctrine_Cli_Exception) {
                 $this->printTasks();
             }
-            exit(1);
         }
     }
 
