@@ -55,6 +55,11 @@ class Doctrine_Migration
     protected $_migrationClassesDirectory = '';
 
     /**
+     * @var int
+     */
+    protected $_errorVersion;
+
+    /**
      * @var array
      */
     protected $_migrationClasses = array();
@@ -347,17 +352,14 @@ class Doctrine_Migration
      * based on the current version of the database.
      *
      * @param  integer $to       Version to migrate to
-     * @param  boolean $dryRun   Whether or not to run the migrate process as a dry run
      * @return integer|false $to       Version number migrated to
      * @throws Doctrine_Exception
      */
-    public function migrate($to = null, $dryRun = false)
+    public function migrate($to = null)
     {
         $this->clearErrors();
 
         $this->_createMigrationTable();
-
-        $this->_connection->beginTransaction();
 
         try {
             // If nothing specified then lets assume we are migrating from
@@ -366,32 +368,19 @@ class Doctrine_Migration
                 $to = $this->getLatestVersion();
             }
 
-            $this->_doMigrate($to);
+            $ret = $this->_doMigrate($to);
         } catch (Exception $e) {
             $this->addError($e);
         }
 
         if ($this->hasErrors()) {
-            $this->_connection->rollback();
-
-            if ($dryRun) {
-                return false;
-            } else {
-                $this->_throwErrorsException();
-            }
+            // $this->_connection->rollback();
+            $this->_throwErrorsException();
         } else {
-            if ($dryRun) {
-                $this->_connection->rollback();
-                if ($this->hasErrors()) {
-                    return false;
-                } else {
-                    return $to;
-                }
-            } else {
-                $this->_connection->commit();
-                $this->setCurrentVersion($to);
-                return $to;
+            if (is_numeric($ret)) {
+                $this->setCurrentVersion($ret);
             }
+            return $ret;
         }
         return false;
     }
@@ -493,13 +482,14 @@ class Doctrine_Migration
             $messages[] = ' Error #' . $num . ' - ' .$error->getMessage() . "\n" . $error->getTraceAsString() . "\n";
         }
 
-        $title = $this->getNumErrors() . ' error(s) encountered during migration';
+        $title = $this->getNumErrors() . ' error(s) encountered during migration #'.$this->_errorVersion;
         $message  = $title . "\n";
         $message .= str_repeat('=', strlen($title)) . "\n";
         $message .= implode("\n", $messages);
 
         throw new Doctrine_Migration_Exception($message);
     }
+
 
     /**
      * Do the actual migration process
@@ -512,19 +502,68 @@ class Doctrine_Migration
     {
         $from = $this->getCurrentVersion();
 
+
         if ($from == $to) {
-            throw new Doctrine_Migration_Exception('Already at version # ' . $to);
+            return 'Already at version #' . $to;
         }
 
         $direction = $from > $to ? 'down':'up';
 
-        if ($direction === 'up') {
-            for ($i = $from + 1; $i <= $to; $i++) {
-                $this->_doMigrateStep($direction, $i);
+        if ($direction == 'up') {
+            $error = false;
+            $i = $from + 1;
+            while ($i <= $to && !$error) {
+                $this->_connection->beginTransaction();
+                $error = $this->_doMigrateStep($direction, $i);
+
+                if (!$error) {
+                    $this->setCurrentVersion($i);
+                    $this->_connection->commit();
+                } else {
+                    $this->_connection->rollback();
+                    $this->_doMigrateStep('down', $i, true);
+                }
+
+                // if stop_migration set, stop migration
+                $migration = $this->getMigrationClass($i);
+                if (property_exists($migration, 'stop_migration') && $migration->stop_migration) {
+                    $message = 'Migration stopped after version #'.$i;
+                    if (property_exists($migration, 'stop_migration_message')) {
+                        $message .= " : ".$migration->stop_migration_message;
+                    }
+
+                    return $message;
+                }
+
+                $i++;
             }
         } else {
-            for ($i = $from; $i > $to; $i--) {
-                $this->_doMigrateStep($direction, $i);
+            $error = false;
+            $i = $from;
+            while ($i > $to && !$error) {
+                // if migration is nonreversible, down function is skipped and migration process is stopped
+                $migration = $this->getMigrationClass($i);
+                if (property_exists($migration, 'nonreversible') && $migration->nonreversible) {
+                    $message = '';
+                    if (property_exists($migration, 'nonreversible_message')) {
+                        $message = $migration->nonreversible_message;
+                    }
+                    $this->_connection->beginTransaction();
+                    $this->setCurrentVersion($i);
+                    $this->_connection->commit();
+
+                    throw new Doctrine_Migration_Exception('Migration #'.$i.' is nonreversible'.($message != '' ? ' : '.$message : ''));
+                }
+
+                $this->_connection->beginTransaction();
+                $error = $this->_doMigrateStep($direction, $i);
+                if (!$error) {
+                    $this->setCurrentVersion($i);
+                    $this->_connection->commit();
+                } else {
+                    $this->_connection->rollback();
+                }
+                $i--;
             }
         }
 
@@ -537,9 +576,10 @@ class Doctrine_Migration
      *
      * @param string $direction Direction to go, 'up' or 'down'
      * @param integer $num
-     * @return void
+     * @param boolean $noException (optional)
+     * @return boolean  true if error else false
      */
-    protected function _doMigrateStep($direction, $num)
+    protected function _doMigrateStep($direction, $num, $noException = false)
     {
         try {
             $migration = $this->getMigrationClass($num);
@@ -558,14 +598,20 @@ class Doctrine_Migration
                 if ($direction == 'down' && method_exists($migration, 'migrate')) {
                     $changes = array_reverse($changes);
                 }
+
                 foreach ($changes as $value) {
                     list($type, $change) = $value;
                     $funcName = 'process' . Doctrine_Inflector::classify($type);
                     if (method_exists($this->_process, $funcName)) {
-                        try {
+                        if (!$noException) {
+                            try {
+                                $this->_process->$funcName($change);
+                            } catch (Exception $e) {
+                                $this->_errorVersion = $num;
+                                $this->addError($e);
+                            }
+                        } else {
                             $this->_process->$funcName($change);
-                        } catch (Exception $e) {
-                            $this->addError($e);
                         }
                     } else {
                         throw new Doctrine_Migration_Exception(sprintf('Invalid migration change type: %s', $type));
@@ -575,8 +621,19 @@ class Doctrine_Migration
 
             $method = 'post' . $direction;
             $migration->$method();
+
+            if ($this->hasErrors()) {
+                return true;
+            }
+
+            return false;
         } catch (Exception $e) {
-            $this->addError($e);
+            if (!$noException) {
+                $this->_errorVersion = $num;
+                $this->addError($e);
+            }
+
+            return true;
         }
     }
 

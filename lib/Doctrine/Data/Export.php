@@ -178,7 +178,9 @@ class Doctrine_Data_Export extends Doctrine_Data
                         $value = serialize($record[$key]);
                     }
 
-                    if ($relation = $this->isRelation($record, $key)) {
+                    if ($record->getTable()->hasField($key)) {
+                    	$preparedData[$className][$recordKey][$key] = $value;
+                    } elseif ($relation = $this->isRelation($record, $key) && $keyType !== Doctrine_Core::IDENTIFIER_NATURAL ) {
                         if ( ! $value) {
                             continue;
                         }
@@ -201,8 +203,6 @@ class Doctrine_Data_Export extends Doctrine_Data
                         $relationValue = $relationClassName . '_' . $value;
 
                         $preparedData[$className][$recordKey][$relationAlias] = $relationValue;
-                    } else if ($record->getTable()->hasField($key)) {
-                        $preparedData[$className][$recordKey][$key] = $value;
                     }
                 }
             }

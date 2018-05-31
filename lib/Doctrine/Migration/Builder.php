@@ -38,28 +38,28 @@ class Doctrine_Migration_Builder extends Doctrine_Builder
      *
      * @var string
      */
-    private $migrationsPath = '';
+    protected $migrationsPath = '';
 
     /**
      * File suffix to use when writing class definitions
      *
      * @var string $suffix
      */
-    private $suffix = '.php';
+    protected $suffix = '.php';
 
     /**
      * Instance of the migration class for the migration classes directory
      *
      * @var Doctrine_Migration $migration
      */
-    private $migration;
+    protected $migration;
 
     /**
      * Class template used for writing classes
      *
      * @var string $tpl
      */
-    private static $tpl;
+    protected static $tpl;
 
     /**
      * Instantiate new instance of the Doctrine_Migration_Builder class

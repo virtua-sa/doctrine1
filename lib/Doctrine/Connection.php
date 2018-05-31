@@ -1721,27 +1721,24 @@ abstract class Doctrine_Connection extends Doctrine_Configurable implements Coun
 
         // If the final length is greater than 64 we need to create an abbreviated fk name
         if (strlen(sprintf($format, $generated)) > $maxLength) {
-            $generated = '';
-
-            foreach ($parts as $part) {
-                $generated .= $part[0];
-            }
-
+            $generated = $parts[0].'_'.$parts[1][0].'_'.$parts[2].'_'.$parts[3][0];
             $name = $generated;
         } else {
             $name = $generated;
         }
 
-        while (in_array($name, $this->_usedNames[$type])) {
-            $e = explode('_', $name);
-            $end = end($e);
+        if ($this->driverName !== 'Mysql') {
+            while (in_array($name, $this->_usedNames[$type])) {
+                $e = explode('_', $name);
+                $end = end($e);
 
-            if (is_numeric($end)) {
-                unset($e[count($e) - 1]);
-                $fkName = implode('_', $e);
-                $name = $fkName . '_' . ++$end;
-            } else {
-                $name .= '_1';
+                if (is_numeric($end)) {
+                    unset($e[count($e) - 1]);
+                    $fkName = implode('_', $e);
+                    $name = $fkName . '_' . ++$end;
+                } else {
+                    $name .= '_1';
+                }
             }
         }
 
