@@ -1,10 +1,14 @@
 language: php
+dist: trusty
 
-php:
-  - 5.2
-  - 5.3
-  - 5.4
-  - 5.5
+matrix:
+  include:
+  - php: 5.5
+  - php: 5.4
+  - php: 5.3
+    dist: precise
+  - php: 5.2
+    dist: precise
 
 notifications:
   email: false
