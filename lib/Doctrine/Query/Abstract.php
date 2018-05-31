@@ -504,7 +504,7 @@ abstract class Doctrine_Query_Abstract
      * Used internally and used to pass flat array of params to the database.
      *
      * @param array $params
-     * @return void
+     * @return array
      */
     public function getFlattenedParams($params = array())
     {

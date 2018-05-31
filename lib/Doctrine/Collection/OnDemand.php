@@ -66,11 +66,13 @@ class Doctrine_Collection_OnDemand implements Iterator
 
     public function rewind()
     {
-        $this->index = 0;
-        $this->_stmt->closeCursor();
-        $this->_stmt->execute();
-        $this->_hydrator->onDemandReset();
-        $this->_hydrateCurrent();
+        if ($this->index!==0) {
+            $this->index = 0;
+            $this->_stmt->closeCursor();
+            $this->_stmt->execute();
+            $this->_hydrator->onDemandReset();
+            $this->_hydrateCurrent();
+        }
     }
 
     public function key()

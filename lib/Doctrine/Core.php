@@ -663,6 +663,11 @@ class Doctrine_Core
                             $className = $classPrefix . $className;
                         }
 
+                        // Don't load file they are no Models
+                        if(strpos($className, '_Model_') === false){
+                            continue;
+                        }
+
                         if ( ! class_exists($className, false)) {
                             if ($modelLoading == Doctrine_Core::MODEL_LOADING_CONSERVATIVE || $modelLoading == Doctrine_Core::MODEL_LOADING_PEAR) {
                                 self::loadModel($className, $file->getPathName());
@@ -786,6 +791,10 @@ class Doctrine_Core
      */
     public static function isValidModelClass($class)
     {
+        // Don't load file they are no Model
+        if (is_string($class) && strpos($class, '_Model_') === false) {
+            return false;
+        }
         if ($class instanceof Doctrine_Record) {
             $class = get_class($class);
         }
