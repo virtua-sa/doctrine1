@@ -668,7 +668,7 @@ class Doctrine_Core
                         }
 
                         // Don't load file they are no Models
-                        if(strpos($className, '_Model_') === false){
+                        if (defined('CALLEO') && strpos($className, '_Model_') === false){
                             continue;
                         }
 
@@ -796,7 +796,7 @@ class Doctrine_Core
     public static function isValidModelClass($class)
     {
         // Don't load file they are no Model
-        if (is_string($class) && strpos($class, '_Model_') === false) {
+        if (defined('CALLEO') && is_string($class) && strpos($class, '_Model_') === false) {
             return false;
         }
         if ($class instanceof Doctrine_Record) {
